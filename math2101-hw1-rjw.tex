@@ -1,0 +1,346 @@
+\documentclass{letter}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{bm}
+\usepackage[letterpaper,portrait,left=2cm,right=2cm,top=3.5cm,bottom=2cm]{geometry}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Robert Wagner\\June 9, 2016}
+\lhead{Math 2101\\Assignment 1}
+\newcounter{question}
+\setcounter{question}{0}
+\usepackage{amsmath,amsthm}
+\usepackage{amssymb}
+
+% magnitude bars
+\newcommand{\norm}[1]{\lvert #1 \rvert}
+
+% explicit vector
+\newcommand{\Ve}[1]{\langle #1 \rangle}
+
+% named vector
+\newcommand{\Vn}[1]{\vec{\bm{#1}}}
+
+\newcommand\Que[1]{%
+   \leavevmode\noindent
+   #1
+}
+
+\newcommand\Ans[2][]{%
+   \leavevmode\noindent
+   {
+       \begin{mdframed}[backgroundcolor=blue!10]
+       #2
+       \end{mdframed}
+   }
+}
+     
+\newenvironment{salign}
+ {\par$\!\aligned}
+ {\endaligned$\par}
+
+\begin{document}
+
+
+\begin{enumerate}
+    \item In the following, let $\Vn{v_1} = \Ve{3, -2, -1}$, $\Vn{v_2} = \Ve{1, 1, -1}$, and $\Vn{v_3} = \Ve{-3, 2, 6}$ be vectors in $\mathbb{R}^3$.\\
+    Find the following, if possible.  If not possible, explain why.
+    \begin{enumerate}[label=(\alph*)]
+        \item\Que{$3 \Vn{v_1} - 2 \Vn{v_2} + 4 \Vn{v_3}$}
+        \Ans{\begin{salign}
+            3 \Vn{v_1} - 2 \Vn{v_2} + 4 \Vn{v_3} & =
+            \Ve{ 3 \times 3, 3 \times -2, 3 \times -1 }  + \Ve{ -2 \times 1,-2 \times 1,-2 \times -1 } + \Ve{ 4 \times -3, 4 \times 2, 4 \times 6 } \\
+            & = \Ve{ 9-2-12,-6-2+8, -3-2+24 } \\
+            & = \underline{\Ve{ -5,0,19 }}
+        \end{salign}
+        }    
+        \item \Que{$ \Vn{v_1} \cdot \Vn{v_2}$}
+        \Ans{\begin{salign}
+            \Vn{v_1} \cdot \Vn{v_2} &=
+            (3 \times 1) + (-2 \times 1) + (-1 \times -1) \\
+            & = 3-2+1 \\
+            & = \underline{2}
+            \end{salign}    
+        %[Since $\Vn{v_1} \cdot \Vn{v_2} = 0$, we can see that $\Vn{v_1}$ and $\Vn{v_2}$ are orthogonal.]
+        }
+        \item \Que{$ 2 \Vn{v_1} \cdot \Vn{v_2} + 2 \Vn{v_3}$}
+        \Ans{
+        This is not possible as written, as evaluating the dot product $2 \Vn{v_1} \cdot \Vn{v_2}$ results in a scalar, and the subsequent addition of the scalar $2 \Vn{v_1} \cdot \Vn{v_2}$ and the vector $2 \Vn{v_3}$ is not defined.  However, if it were written
+        $ 2 \Vn{v_1} \cdot (\Vn{v_2} + 2 \Vn{v_3}) $ then it would evaluate to a scalar.  
+        }
+        \item \Que{$\Vn{v_1} \cdot \Vn{v_2} \cdot \Vn{v_3} $}
+        \Ans{
+        This is not possible as written, as evaluating the dot product $\Vn{v_1} \cdot \Vn{v_2}$ results in a scalar, and the subsequent dot product between the scalar $\Vn{v_1} \cdot \Vn{v_2}$ and the vector $\Vn{v_3}$ is undefined. 
+        }
+        \item \Que{$\Vn{v_1} \cdot (3 \Vn{v_2} - 2 \Vn{v_3})$}
+        \Ans{\begin{salign}
+            \Vn{v_1} \cdot (3 \Vn{v_2} - 2 \Vn{v_3}) {}&=
+            \Ve{ 3,-2,-1 } \cdot (\Ve{ 3 \times 1, 3 \times 1, 
+                3 \times -1 } + \Ve{ -2 \times -3, 
+                -2 \times 2, -2 \times 6 })\\
+            &= \Ve{ 3,-2,-1 } \cdot \Ve{ 3 + 6, 3 - 4, -3 - 12 } \\
+            &= \Ve{ 3,-2,-1 } \cdot \Ve{ 9, -1, -15 } \\
+            &= (3 \times 9)+(-2 \times -1)+(-1 \times -15) \\
+            &= 27+2+15 \\
+            &= \underline{44}
+            \end{salign}
+        }
+        \item \Que{$\norm{\Vn{v_1}}$}
+        \Ans{\begin{salign}
+              \norm{\Vn{v_1}} {}&= \norm{\Ve{ 3, -2, -1 }} \\
+              & = \sqrt{3^2 + (-2)^2 + (-1)^2} \\
+              &= \sqrt{9 + 4 + 1} \\
+              &= \underline{\sqrt{14}}
+            \end{salign}
+        }
+        \item \Que{$\norm{5\Vn{v_1}}$}
+        \Ans{\begin{salign}
+              \norm{5\Vn{v_1}} {}& = \norm{\Ve{ 5 \times 3, 5 \times -2, 5 \times -1 }} \\
+              & = \norm{\Ve{ 15, -10, -5 }} \\
+              & = \sqrt{15^2 + (-10)^2 + (-5)^2} \\
+              & = \sqrt{225 + 100 + 25} \\
+              & = \sqrt{350} \\
+              & = \underline{5\sqrt{14}}
+           \end{salign} 
+        %[Therefore, it appears that $\norm{5\Vn{v_1}} = 5\norm{\Vn{v_1}}$]
+        }
+    \end{enumerate}
+    \newpage
+    \item In the following, assume $\Vn{u} = \Ve{ u_1, u_2, u_3 }$ and $\Vn{v}=\Ve{ v_1, v_2, v_3 }$, and $\theta$ is the angle between $\Vn{u}$ and $\Vn{v}$. 
+    \begin{enumerate}[label=(\alph*)]
+    \item \Que{Prove: $\Vn{u} \cdot \Vn{v} = \norm{\Vn{u}}\norm{\Vn{v}}\cos{\theta}$}
+    \Ans{Let $\Vn{u}, \Vn{v}$ be non-zero vectors in $\mathbb{R}^3$ such that $\theta \in [0,\pi)$ is the angle between them.  The law of cosines states that 
+    \begin{align*}
+        \norm{\Vn{u} - \Vn{v}}^2 &= \norm{\Vn{u}}^2 + \norm{\Vn{v}}^2 - 2 \norm{\Vn{u}}\norm{\Vn{v}}\cos{\theta}
+    \shortintertext{is true for all non-zero vectors. Thus}
+        \norm{\Vn{u} - \Vn{v}}^2  {}&= \norm{\Ve{ u_1-v_1,u_2-v_2,u_3-v_3}}^2 \\ 
+        & = (\sqrt{(u_1-v_1)^2+(u_2-v_2)^2+(u_3-v_3)^2})^2 \\
+        & = (u_1^2-2u_1v_1+v_1^2)+(u_2^2-2u_2v_2 + v_2^2)+(u_3^2-2u_3v_3+v_3^2) \\
+        & = (\sqrt{u_1^2+u_2^2+u_3^2})^2+(\sqrt{v_1^2+v_2^2+v_3^2})^2 - 2(u_1v_1+u_2v_2+u_3v_3)\\
+        & = \norm{\Vn{u}}^2 + \norm{\Vn{v}}^2 - 2(\Vn{u} \cdot \Vn{v})
+    \shortintertext{and we can rewrite the law of cosines as} 
+        \norm{\Vn{u}}^2 + \norm{\Vn{v}}^2-2(\Vn{u} \cdot \Vn{v})&=\norm{\Vn{u}}^2 + 
+        \norm{\Vn{v}}^2 - 2 \norm{\Vn{u}}\norm{\Vn{v}}\cos{\theta}
+    \shortintertext{simplifying this, we get}
+        \Vn{u} \cdot \Vn{v} &= \norm{\Vn{u}}\norm{\Vn{v}}\cos{\theta}
+    \end{align*}
+    Therefore, we have shown that if $\Vn{u}$ and $\Vn{v} \in \mathbb{R}^3$ are non-zero vectors and 
+    $\theta \in [0,\pi)$ is the angle between them, then 
+    $\norm{\Vn{u} \cdot \Vn{v}} = \norm{\Vn{u}}\norm{\Vn{v}}\cos{\theta}$ 
+    \qed}
+    \item \Que{Let $\Vn{u}$ and $\Vn{v}$ be two sides of a triangle.  Find the area of the triangle.}
+    \Ans{
+        The area of a triangle is defined as $A = \frac{bh}{2}$
+        where $b,h \in \left[0, \infty \right)$ 
+        are the base length and height of the triangle, respectively.  
+        Let $b = adjacent = \norm{\Vn{u}}$ and $hypotenuse = \norm{\Vn{v}}$.  
+        Using the definition of $\sin{\theta} = \frac{opposite}{hypotenuse}$, 
+        and considering the $h=height = opposite$, 
+        we find that $\sin{\theta} = \frac{h}{\norm{\Vn{v}}}$ 
+        and subsequently $h = \norm{\Vn{v}}\sin{\theta}$.      
+        \\~\\ Since $\sin^2{\theta} + \cos^2{\theta}=1$ 
+        and $\cos{\theta} = \frac{\Vn{u}\cdot\Vn{v}}{\norm{\Vn{u}}\norm{\Vn{v}}}$
+        it follows that
+    \begin{align*}
+        \sin{\theta} &= \sqrt{1-\left(\frac{\Vn{u}\cdot\Vn{v}}{\norm{\Vn{u}}\norm{\Vn{v}}}\right)^2} \text{ for }\theta \in [0, \pi) \\
+        &= \frac{1}{\norm{\Vn{u}}\norm{\Vn{v}}}
+           \sqrt{\norm{\Vn{u}}^2\norm{\Vn{v}}^2-(\Vn{u}\cdot\Vn{v})^2
+           }\\
+        &= \frac{1}{\norm{\Vn{u}}\norm{\Vn{v}}}
+           \sqrt{(u_1^2+u_2^2+u_3^2)(v_1^2+v_2^2+v_3^2)-(u_1v_1+u_2v_2+u_3v_3)(u_1v_1+u_2v_2+u_3v_3)
+           }\\
+        &= \frac{1}{\norm{\Vn{u}}\norm{\Vn{v}}}
+           \sqrt{(u_1^2v_2^2-2u_1v_2u_2v_1+u_2^2v_1^2)+
+                 (u_1^2v_3^2-2u_1v_3u_3v_1+u_3^2v_1^2)+
+                 (u_2^2v_3^2-2u_2v_3u_3v_2+u_3^2v_2^2)
+           }\\ 
+        &= \frac{1}{\norm{\Vn{u}}\norm{\Vn{v}}}
+           \sqrt{(u_1v_2-u_2v_1)^2+
+                 (u_1v_3-u_3v_1)^2+
+                 (u_2v_3-u_3v_2)^2
+           }\\
+        &= \frac{\norm{\Vn{u} \times \Vn{v}}}{\norm{\Vn{u}}\norm{\Vn{v}}}
+    \end{align*}
+    and subsequently
+    \begin{align*}
+    A = \frac{bh}{2} = \frac{\norm{\Vn{u}}\norm{\Vn{v}}\sin{\theta}}{2}
+     &= \frac{\norm{\Vn{u}}\norm{\Vn{v}}\norm{\Vn{u}\times\Vn{v}}}
+         {2\norm{\Vn{u}}\norm{\Vn{v}}}
+      = \frac{\norm{\Vn{u}\times\Vn{v}}}{2}
+    \end{align*}
+    }
+    \end{enumerate}
+    \newpage
+    \item Let $P=(1,4,-3)$, $Q=(5,1,-3)$, and $R=(-1,1,2)$ be points in $\mathbb{R}^3$.
+    \begin{enumerate}[label=(\alph*)]
+    \item \Que{Explain how you would write the parametric equation of the line through $X$, where $\Vn{v}$ gives the direction of a line.}
+    \Ans{
+    I would take a starting point $X=x_0$ and add $\Vn{v}$ scaled by the parameter $s$ for all $s \in \mathbb{R}$. 
+%        Let $p_0 = X = (x_0, y_0, z_0)$ and $\Vn{v} = \Ve{ x,y,z } $ and
+%        define line $L = \lbrace p : p = p_0 + t\Vn{v}$ for all $t \in \mathbb{R} \rbrace$
+%        \begin{align*}
+%           &L_x(t) = x_0 + tx
+%          &&L_y(t) = y_0 + ty
+%         &&&L_z(t) = z_0 + tz
+%       \end{align*}
+    }
+    \item \Que{Find the parametric equation of the lines $\overrightarrow{PQ}, \overrightarrow{PR}, \overrightarrow{QR}$}
+    \Ans{
+        Let $\Vn{u} = \overrightarrow{PQ} = \Ve{ 4, -3, 0 }$ 
+        and $\Vn{v} = \overrightarrow{PR} = \Ve{ -2,-3, 5 }$ 
+        and $\Vn{w} = \overrightarrow{QR} = \Ve{ -6, 0, 5 }$
+    \begin{align*}
+    PQ(s) = p_0 + s\Vn{u} 
+         &= (1,4,-3) + s\Ve{ 4,-3,0} \\
+    PR(s) = p_0 + s\Vn{v} 
+         &= (1,4,-3) + s\Ve{ -2,-3,5 } \\
+    QR(s) = q_0 + s\Vn{w}
+         &= (5,1,-3) + s\Ve{-6,0,5}  
+    \end{align*}
+    for all $s \in \mathbb{R}$
+%    \begin{align*}
+%    &PQ_x(t)=1+4t &&PR_x(t)=1-2t &&&QR_x(t)=5-6t\\
+%    &PQ_y(t)=4-3t &&PR_y(t)=4-3t &&&QR_y(t)=1~~~~~~\\
+%    &PQ_z(t)=-3   &&PR_z(t)=5t-3 &&&QR_z(t)=5t-3
+%    \end{align*} 
+    }
+    \item \Que{Explain why any linear combination of $\overrightarrow{PQ}$ and $\overrightarrow{PR}$ must be in the same plane as $P, Q, R$.}
+    \Ans{
+    A linear combination of vectors is the sum of those vectors each multiplied by a corresponding scalar value.
+    As scaling a vector does not change its direction, any linear combination of two vectors will form a new vector that is co-planar with both original vectors.  As long as the two vectors are not co-linear and neither is the zero vector, all possible linear combinations form a plane. If the two are co-linear then they are also co-planar.  
+    }
+    \item \Que{Use the proceeding idea to write the parametric equation of the plane $PQR$.} 
+    \Ans{
+        Let $p_0 = P = (1,4,-3)$ be a point on the plane $PQR$,
+        and let $\Vn{u} = \overrightarrow{PQ} = \Ve{ 4, -3, 0 }$ 
+        and $\Vn{v} = \overrightarrow{PR} = \Ve{ -2,-3, 5 }$ 
+        be vectors on the plane $PQR$.
+        \begin{align*}
+        PQR(s,t) &= \lbrace p:p=p_0+s\Vn{u}+t\Vn{v} \text{ for all } s,t \in \mathbb{R}\rbrace
+        = (1,4,-3) + s\Ve{4,-3,0} + t\Ve{-2,-3,5}
+        \end{align*}
+    }
+    \item \Que{Find the area of the triangle $\Delta PQR$.}
+    \Ans{
+        Let $\Vn{u} = \overrightarrow{PQ} = \Ve{ 4,-3,0}$ 
+        and $\Vn{v} = \overrightarrow{PR} = \Ve{ -2,-3, 5 }$ 
+        be vectors in $\mathbb{R}^3$ forming two sides of $\Delta PQR$.
+        \begin{align*}
+            area(\Delta PQR) &= \frac{\norm{\Vn{u}\times\Vn{v}}}{2}\\
+            &= \frac{1}{2}\sqrt{[(4)(-3) - (-3)(-2)]^2+[(4)(5)-(0)(-2)]^2 + [(-3)(5)-(0)(-3)]^2}\\
+            &= \frac{1}{2}\sqrt{(-18)^2 + (20)^2 + (-15)^2}
+            = \frac{\sqrt{949}}{2}
+            \approx \underline{15.403}
+        \end{align*}
+    }
+    \item \Que{Find the distance between the point $R$ and the line $\overrightarrow{PQ}$.}
+    \Ans{
+        Let $\Vn{u} = \overrightarrow{PQ} = \Ve{ 4,-3,0}$ 
+        and $\Vn{v} = \overrightarrow{PR} = \Ve{ -2,-3, 5 }$ 
+        be vectors in $\mathbb{R}^3$, and let $\theta \in [0,\pi)$ be the angle between them.  
+        The distance between $R$ and $\overrightarrow{PQ}$ is equivalent
+        to the triangle height that we calculated in question 2(b) above, that is:
+        \begin{align*}
+            dist(R, \overrightarrow{PQ}) &= \norm{\Vn{v}}\sin{\theta}
+            = \frac{\norm{\Vn{v}}\norm{\Vn{u}\times\Vn{v}}}{\norm{\Vn{u}}\norm{\Vn{v}}}
+            = \frac{\norm{\Vn{u}\times\Vn{v}}}{\norm{\Vn{u}}}\\
+            &= \frac{\sqrt{[(4)(-3) - (-3)(-2)]^2+[(4)(5)-(0)(-2)]^2 + [(-3)(5)-(0)(-3)]^2}}
+                    {\sqrt{4^2+(-3)^2+0^2}}\\
+            &= \frac{\sqrt{949}}{5}
+            \approx \underline{6.161}
+        \end{align*}
+    }
+    \end{enumerate}
+    \newpage
+    \item Suppose $M$ is the coefficient matrix for a system of equations augmented by the constants of the equation.  For each of the following, identify the corresponding operation on a system of equations; then state whether the operation is allowable or forbidden.  Assume $c \not = 0$.
+    \begin{enumerate}[label=(\alph*)]
+    \item \Que{Multiplying every term of a row by $c$.}
+    \Ans{
+    Multiplying every term in a row by a scalar would not result in a change of direction of the underlying vector of that row, and thus would have no effect on the system as a whole.  Thus this is \underline{allowed}.
+    }
+    \item \Que{Switching two columns.}
+    \Ans{
+    Switching two columns results in a switching of coefficients between variables, resulting in a possibly different value for the system.  Thus this operation is \underline{forbidden}.
+    }
+    \item \Que{Switching two rows.}
+    \Ans{
+    Switching two rows results in a null operation on the system, as each row represents a discrete equation in the system, and there is no defined ordering of the equations in the system.  Therefore this operation is \underline{allowed}.
+    }
+    \item \Que{Adding $c$ to each term in a row.}
+    \Ans{
+    Adding a constant to all terms in a row would result in a different value for the equation, for example
+    \begin{align*}
+    3x&=15\\
+    x&=5
+    \shortintertext{is not equivalent to}
+    5x&=17\\
+    x&\approx 3.4
+    \end{align*}
+    Therefore this operation is \underline{forbidden}.
+    }
+    \item \Que{Multiplying every term in a row by $c$, then adding the corresponding terms to another row.}
+    \Ans{
+    If we were to conceptualize the equations of a system of linear of equations as being co-planar, any linear combination of equations in the system would form a new equation that is co-planar with the existing equations, and thus is readily acceptable as a new equation in the system.  Therefore this operation is \underline{allowed}.
+    }
+    \item \Que{Suppose that, after applying a sequence of allowable operations to $M$, you end up with a row consisting of all zeroes except the last entry, which is non-zero.  What does this say about the original system of equations?}
+    \Ans{If by "last entry" you mean the augmented column, then you have a system of equations with no viable solutions, as there is no way that a combination of variables all scaled by zero can equal a non-zero value.
+    }
+    \end{enumerate}
+    \newpage
+    \item Find a parameterization of the following systems of equations.
+    \begin{enumerate}[label=(\alph*)]
+    \item \Que{
+        \begin{minipage}[t]{0.25\textwidth}
+        \begin{flushright}
+        $3x+2y=5$
+        \end{flushright}
+        \end{minipage}
+        }
+    \Ans{
+    Let $x=1+2s$, \\ 
+    Then:
+    \begin{align*}
+      3(1+2s) + 2y &= 5 &&\rightarrow 2y = 5-(3+6s) &&&\rightarrow
+      y =\frac{2-6s}{2}&&&&\rightarrow y=1-3s
+    \end{align*}
+    Thus $(x,y) = (1,1) + s\Ve{2,-3}$\ for all $s \in \mathbb{R}$
+    }
+    \item \Que{
+        \begin{minipage}[t]{0.25\textwidth}
+        \begin{flushright}
+        $3w-2x-4y+2z=0$\par $3x+2y-5z=0$\par $2y-1z=0$ 
+        \end{flushright}
+        \end{minipage}
+        }
+    \Ans{
+    Let $z=18s$. \\
+    Then: 
+    \begin{align*}
+    2y - 18s &= 0 &&\rightarrow 2y = 18s &&&\rightarrow y = 9s \\
+    3x +2(9s) - 5(18s) &= 0 &&\rightarrow  3x = 72s &&&\rightarrow x = 24s\\
+    3w-2(24s)-4(9s)+2(18s) &=0 &&\rightarrow 3w = 48s &&&\rightarrow w = 16s   
+    \end{align*} 
+    Thus $(w,x,y,z) = (0,0,0,0) + s\Ve{16,24,9,18}$\ for all $s \in \mathbb{R}$
+    }
+    \item \Que{
+        \begin{minipage}[t]{0.25\textwidth}
+        \begin{flushright}
+        $2w+3x-5y-2z=0$\par $x+2y-1z=0$
+        \end{flushright}
+        \end{minipage}
+        }
+    \Ans{
+    Let $z=4s$, \\ and $x=4t$. \\ Then:
+    \begin{align*}
+      4t+2y-4s&=0 &&\rightarrow 2y=4s-4t &&&\rightarrow y=2s-2t \\
+      2w+3(4t)-5(2s-2t)-2(4s)&=0 &&\rightarrow 2w=18s-22t &&&\rightarrow w=9s-11t 
+    \end{align*} 
+    Thus $(w,x,y,z) = (0,0,0,0) + s\Ve{9,0,2,4} + t\Ve{-11,4,-2,0}$ for all $s,t \in \mathbb{R}$.
+    }
+    \end{enumerate}
+\end{enumerate} 
+\end{document}  
