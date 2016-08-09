@@ -4,7 +4,7 @@ These are the homework assignments completed in LaTeX for my linear algebra cour
 ### [Assignment set instructions](assignments.pdf)
 
 
-## [Assignment 1](math2101-rjw-hw1.pdf) ([source](math2101-rjw-hw1.tex))
+## [Assignment 1](math2101-hw1-rjw.pdf) ([source](math2101-hw1-rjw.tex))
 ### Vectors
 1. Arithmatic operations on vectors.
 2. Properties of dot products.  proof of the dot product / cosine relationship.
@@ -13,7 +13,7 @@ These are the homework assignments completed in LaTeX for my linear algebra cour
 5. Exercises: Parameterization of non-unique solutions to systems of equations.
 
 
-## [Assignment 2](math2101-rjw-hw2.pdf) ([source](math2101-rjw-hw2.tex))
+## [Assignment 2](math2101-hw2-rjw.pdf) ([source](math2101-hw2-rjw.tex))
 ### Matrices and applications
 1. Solving systems of equations using row echelon and reduced row echelon form of matrices.
 2. Deriving the normal vector, proof that the cross product is perpendicular.
@@ -22,7 +22,7 @@ These are the homework assignments completed in LaTeX for my linear algebra cour
 5. Exercises: Finding angle between vectors, unit vectors, normal vector.
 
 
-## [Assignment 3](math2101-rjw-hw3.pdf) ([source](math2101-rjw-hw3.tex))
+## [Assignment 3](math2101-hw3-rjw.pdf) ([source](math2101-hw3-rjw.tex))
 ### Linear Transformations
 In this workset I made extensive use of TikZ graphics to produce transformation diagrams.
 1. Linear transformations.  Proof that linear transformations are linear operators.
@@ -32,7 +32,7 @@ In this workset I made extensive use of TikZ graphics to produce transformation 
 5. Exercises: Row reduction, Proof of Cauchy-Schwartz inequality, Proof of commutativity of vector dot product.
 
 
-## [Assignment 4](math2101-rjw-hw4.pdf) ([source](math2101-rjw-hw4.tex))
+## [Assignment 4](math2101-hw4-rjw.pdf) ([source](math2101-hw4-rjw.tex))
 ### Vector Spaces
 1. Exercises: Elementary Matrix operations.
 2. Left and Right inverses, deriving the determinant.
@@ -41,7 +41,7 @@ In this workset I made extensive use of TikZ graphics to produce transformation 
 5. Exercises: Vector spaces.
 
 
-## [Assignment 5](math2101-rjw-hw5.pdf) ([source](math2101-rjw-hw5.tex))
+## [Assignment 5](math2101-hw5-rjw.pdf) ([source](math2101-hw5-rjw.tex))
 ### Basis, Span, Independence
 This was the most difficult and proof-heavy assignment of the course.
 1. Exercises: Find row-space, column-space, and null-space of matrices.
@@ -51,7 +51,7 @@ This was the most difficult and proof-heavy assignment of the course.
 5. Exercises.
 
 
-## [Assignment 6](math2101-rjw-hw6.pdf) ([source](math2101-rjw-hw6.tex))
+## [Assignment 6](math2101-hw6-rjw.pdf) ([source](math2101-hw6-rjw.tex))
 ### Linear Mapping, Eigenvectors
 1. Proofs whether various mappings are / are not linear.
 2. Application: Permutation matrices.
@@ -60,7 +60,7 @@ This was the most difficult and proof-heavy assignment of the course.
 5. Exercises.
 
 
-## [Assignment 7](math2101-rjw-hw7.pdf) ([source](math-2101-rjw-hw7.tex))
+## [Assignment 7](math2101-hw7-rjw.pdf) ([source](math-2101-hw7-rjw.tex))
 ### Cramer's Rule
 1. Exercises: Finding determinants.
 2. Deriving Cramer's Rule.
@@ -69,7 +69,7 @@ This was the most difficult and proof-heavy assignment of the course.
 5. Exercises.
 
 
-## [Assignment 8](math2101-rjw-hw8.pdf) ([source](math2101-rjw-hw8.tex))
+## [Assignment 8](math2101-hw8-rjw.pdf) ([source](math2101-hw8-rjw.tex))
 ### Lattices, The Wronskian
 1. Exercises: Distances between points, lines, planes.
 2. Application: Adjacency matrix of a graph.
