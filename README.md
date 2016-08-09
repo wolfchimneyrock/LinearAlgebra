@@ -24,7 +24,9 @@ These are the homework assignments completed in LaTeX for my linear algebra cour
 
 ## [Assignment 3](math2101-hw3-rjw.pdf) ([source](math2101-hw3-rjw.tex))
 ### Linear Transformations
+
 In this workset I made extensive use of TikZ graphics to produce transformation diagrams.
+
 1. Linear transformations.  Proof that linear transformations are linear operators.
 2. Proof that linear transformations are not commutative.
 3. Application: Stochastic modeling with linear transformations.  
@@ -43,7 +45,9 @@ In this workset I made extensive use of TikZ graphics to produce transformation 
 
 ## [Assignment 5](math2101-hw5-rjw.pdf) ([source](math2101-hw5-rjw.tex))
 ### Basis, Span, Independence
+
 This was the most difficult and proof-heavy assignment of the course.
+
 1. Exercises: Find row-space, column-space, and null-space of matrices.
 2. Proofs that the span of a vector space is linearly independent.
 3. Proofs that independence and singularity of Ax=0 are correlated.
