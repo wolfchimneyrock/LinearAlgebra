@@ -1,0 +1,559 @@
+\documentclass{letter}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{bm}
+\usepackage[letterpaper,portrait,left=2cm,right=2cm,top=3.5cm,bottom=2cm]{geometry}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Robert Wagner\\July 7, 2016}
+\lhead{Math 2101\\Assignment 8}
+\newcounter{question}
+\setcounter{question}{0}
+\usepackage{amsmath,amsthm}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+
+
+% magnitude bars
+\newcommand{\norm}[1]{\lvert #1 \rvert}
+
+% explicit vector
+\newcommand{\Ve}[1]{\langle #1 \rangle}
+
+% named vector
+\newcommand{\Vn}[1]{\vec{#1}}
+
+% a line with an arrow above
+\newcommand{\Line}[1]{\overrightarrow{#1}}
+
+% equals with question mark above
+\newcommand{\?}{\stackrel{?}{=}}
+
+% formatting for questions
+\newcommand\Que[1]{%
+   \leavevmode\noindent
+   #1
+}
+
+% formatting for answers
+\newcommand\Ans[2][]{%
+   \leavevmode\noindent
+   {
+       \begin{mdframed}[backgroundcolor=blue!10]
+       #2
+       \end{mdframed}
+   }
+}
+
+% this is like align but squashed     
+\newenvironment{salign}
+ {\par$\!\aligned}
+ {\endaligned$\par}
+
+% a matrix, parameter is column count
+\newenvironment{Mat}[1]{%
+  \left[\begin{array}{*{#1}{r}}
+}{%
+  \end{array}\right]
+}
+
+
+% a matrix, parameter is column count centered
+\newenvironment{Cmat}[1]{%
+  \left[\begin{array}{*{#1}{c}}
+}{%
+  \end{array}\right]
+}
+
+% an augmented matrix, with one augmented column
+\newenvironment{Amat}[1]{%
+  \left[\begin{array}{@{}*{#1}{r}|r@{}}
+}{%
+  \end{array}\right]
+}
+% an augmented matrix with n columns and n augmented columns
+\newenvironment{Amat2}[1]{%
+  \left[\begin{array}{@{~}*{#1}{r}| @{~~}*{#1}{r}}
+}{%
+  \end{array}\right]
+}
+% an augmented matrix with n columns and m augmented columns
+\newenvironment{Amat3}[2]{%
+  \left[\begin{array}{@{~}*{#1}{r}| @{~~}*{#2}{r}}
+}{%
+  \end{array}\right]
+}
+
+
+\begin{document}
+
+
+\begin{enumerate}
+    \item Let $P=(1,1,-1), Q=(1,2,5), R=(-1,-3,-4)$\ be points in $\mathbb{R}^3$.
+    \begin{enumerate}
+    \item Find the distance between the line $\Line{PQ}$\ and the point $R$.
+    \Ans{
+      \begin{align*}
+      \Vn{v} &= Q-P = \Ve{1-1,2-1,5-(-1)} = \Ve{0,1,6} \\
+      \Vn{w} &= R-P = \Ve{-1-1,-3-1,-4-(-1)}=\Ve{-2,-4,-3}\\
+      \Vn{w}_\perp &= \Vn{w}-proj_{\Vn{v}}\Vn{w} = \Vn{w}-\frac{\Vn{v}\cdot\Vn{w}}{\Vn{v}\cdot\Vn{v}}\Vn{v}\\
+                   &= \Ve{-2,-4,-3} - \frac{0+(-4)+(-18)}{0+1+36}\Ve{0,1,6}\\
+                   &= \Ve{\frac{-74}{37},\frac{-148}{37},\frac{-111}{37}} - \frac{-22}{37}\Ve{0,1,6} = \frac{1}{37}\Ve{-74,-126, 21} \\
+      \norm{\Vn{w}_\perp} &= \frac{1}{37}\sqrt{(-74)^2+(-126)^2+(21)^2} = \frac{\sqrt{21793}}{37}\\
+                          &\approx \underline{3.989852}
+      \end{align*}
+      Is the distance between the line $\Line{PQ}$\ and the point $R$.
+    }
+    \item Find the distance between the origin and the plane $PQR$.
+    \Ans{
+      $\Vn{v}=\Ve{0,1,6}$\ and $\Vn{w}=\Ve{-2,-4,-3}$\ found above are two non-parallel vectors in $PQR$.
+      Since we are working in $\mathbb{R}^3$, the cross product is defined and we can find a vector $\Vn{n}$\ that is normal to the plane:
+      \begin{align*}
+          \Vn{n} &= \begin{vmatrix} i & j & k \\ 0 & 1 & 6 \\ -2 & -4 & -3 \end{vmatrix} 
+                  = [(1)(-3)-(6)(-4)]i-[(0)(-3)-(6)(-2)]j+[(0)(-4)-(1)(-2)]k \\
+                 &= \Ve{21,-12,2}
+          \shortintertext{solving for x using $p_0=P=(1,1,-1)$\ as an initial point we get the planar equation:}
+               d &= \Vn{n}\cdot (p_0) = 21(1)-12(1)+2(-1) = 21-12 - 2 = 7
+          \shortintertext{thus the equation for the plane is}
+               7 &= 21x_1-12x_2+2x_3
+          \shortintertext{verify for $Q,R$:}
+               7 &= 21(1)-12(2)+2(5)=21-24+10=7\\
+               7 &= 21(-1)-12(-3)+2(-4) = -21+36-8 = 7
+          \shortintertext{Find distance:}
+               7 &= 21(0+21d)-12(0-12d)+2(0+2d) \\
+               7 &= 441d + 144d + 4d = 589d \\
+               d &= \frac{7}{589}
+      \end{align*}
+      Is the distance between the origin and the plane $PQR$.
+    }    
+    \newpage
+    \item Find the point on the plane $PQR$\ closest to the point $S=(1,1,3)$.
+    \Ans{
+       Using $\Vn{n}=\Ve{21,-12,2}$\ found above we can express the line perpendicular to $PQR$\ and thru $S$\ as
+       \begin{align*}
+           \Line{S} &= S + c\Vn{n} = (1,1,3)+c\Ve{21,-12,2} = \Ve{1+21c,1-12c,3+2c}
+           \shortintertext{for some scalar $c\in\mathbb{R}$.  Our nearest point is the intersection between $PQR$\ and $\Line{S}$:}
+           7 &= 21(1+21c) - 12(1-12c) + 2(3+2c) \\
+           7 &= 21+441c-12+144c+6+4c = 589c+15 \\
+           c &= \frac{-8}{589}
+           \shortintertext{thus the nearest point $S^\prime$\ is}
+           S^\prime &= S + \frac{-8}{589}\Ve{21,-12,2} = (1,1,3) + \frac{1}{589}\Ve{-168, 96, -16} = \frac{1}{589}(421, 685, 1751)\\
+           &\approx \underline{(0.715, 1.163, 2.973)}
+           \shortintertext{verify:}
+           7 &= 21(0.715)-12(1.163)+2(2.973) \approx 7 
+       \end{align*}
+    }    
+    \end{enumerate}
+    ~\\     
+    \item Web traffic can be modeled using a graph: this consists of a set of points connected by edges.  
+    We can represent the graph using an adjacency matrix $A$, where $a_{ij}=1$\ if there is a link from point $i$\ to point $j$.
+    Note that edges are directional, and $a_{ij}=1$\ does not necessarily imply $a_{ji}=1$.  Use the figure below:
+    
+    \begin{enumerate}[label=(\alph*)]
+    \item \Que{
+        Form the adjacency matrix $A$\ for the graph above.
+    }
+    \Ans{
+      \begin{align*}
+         A &= \begin{Mat}{4} 0 & 1 & 1 & 1 \\
+                             0 & 0 & 0 & 1 \\
+                             1 & 0 & 0 & 1 \\
+                             0 & 0 & 1 & 0 \end{Mat}
+      \end{align*}
+    }
+    \item \Que{
+        A useful result is that the $ij$th entry of the matrix $A^n$\ will be the number of ways you can get from $i$\ to $j$\ via a path
+        of length $n$.  Find $A^4$; determine the number of ways you can get from $1$\ to $4$\ using a path of length $4$; then list them by describing the sequence i.e. $1\to 4\to 3\to 1\to 4$.
+    }
+    \Ans{
+      \begin{align*}
+        A^2 &=\begin{Mat}{4} 0 & 1 & 1 & 1 \\
+                             0 & 0 & 0 & 1 \\
+                             1 & 0 & 0 & 1 \\
+                             0 & 0 & 1 & 0 
+                             \end{Mat}
+              \begin{Mat}{4} 0 & 1 & 1 & 1 \\
+                             0 & 0 & 0 & 1 \\
+                             1 & 0 & 0 & 1 \\
+                             0 & 0 & 1 & 0 
+                             \end{Mat}
+             =\begin{Mat}{4} 1 & 0 & 1 & 2 \\
+                             0 & 0 & 1 & 0 \\
+                             0 & 1 & 2 & 1 \\
+                             1 & 0 & 0 & 1 
+                             \end{Mat}\\
+         A^4 &=\begin{Mat}{4}1 & 0 & 1 & 2 \\
+                             0 & 0 & 1 & 0 \\
+                             0 & 1 & 2 & 1 \\
+                             1 & 0 & 0 & 1 
+                             \end{Mat}
+              \begin{Mat}{4} 1 & 0 & 1 & 2 \\
+                             0 & 0 & 1 & 0 \\
+                             0 & 1 & 2 & 1 \\
+                             1 & 0 & 0 & 1 
+                             \end{Mat}
+             =\begin{Mat}{4} 3 & 1 & 3 & 5 \\
+                             0 & 1 & 2 & 1 \\
+                             1 & 2 & 5 & 3 \\
+                             2 & 0 & 1 & 3
+                             \end{Mat}
+      \end{align*}
+      There are five ways to get from $1$\ to $4$\ in four steps:\\
+      $ 1 \to 2 \to 4 \to 3 \to 4 \\
+        1 \to 3 \to 1 \to 2 \to 4 \\
+        1 \to 3 \to 1 \to 3 \to 4 \\
+        1 \to 3 \to 4 \to 3 \to 4 \\
+        1 \to 4 \to 3 \to 1 \to 4$
+      
+    }
+    \newpage
+    \item \Que{
+        Suppose $B$\ is an $N\times N$ adjacency matrix for a set of $N$\ connected web pages 
+        (where it's always possible to find a path from one page to any other).
+        Prove, or explain why not true:  
+        There is some $k$\ for which all entries of $B^k$\ are non-zero.  
+    }
+    \Ans{
+      Since the graph is fully connected, for each element $B_{ij}$ of $B$\ where $i,j\in\{1,\cdots,N\}$\ are the row and column indexes, there exists some natural number $p_{ij}$\ such that $B^{p_{ij}}_{ij} \not = 0$.  Since a complete cycle from any $B_{ij}$\ to $B_{ji}$\ and back can be looped an arbitrary number of times, it is also the case that $(B^{p_{ij}+p_{ji}}_{ij})^m\not = 0$\ for any $m\in\mathbb{N}$.  Let \[k=\prod^N_{i=1}\prod^N_{j=i+1}p_{ij}+p_{ji}\]  For each $B_{ij}$\ we see that $k=n(p_{ij}+p_{ji})$\ where $n\in\mathbb{N}$\ is the product of all cycle exponents except for $p_{ij}+p_{ji}$.  Thus, the $k$th power of the adjacency matrix provides complete cycles for all entries, and thus all values are non-zero.
+    }
+    \end{enumerate}
+    ~\\	
+    \item Let $p_1(x)=x^2-3x-10, p_2(x)=5x+7, p_3(x)=x^2+12x+11$.
+    \begin{enumerate}[label=(\alph*)]  
+      \item \Que{
+      Using standard polynomial addition, what polynomials $ax^2+bx+c$\ can be expressed as linear combinations of $p_1,p_2,p_3$?
+      }
+      \Ans{
+          \begin{align*}
+          p_n &= a(p_1)+b(p_2)+c(p_3)=a(x^2-3x-10)+b(5x+7)+c(x^2+12x+11)
+          \shortintertext{for $a,b,c\in\mathbb{R}$.  Simplifying:}
+          p_n &= (a+c)x^2 + (5b+12c-3a)x + (7b+11c-10a) 
+          \end{align*}
+      }      
+      \item \Que {
+          Find a basis for the vector space spanned by $p_1,p_2,p_3$.
+      }
+      \Ans{
+          Using $\{x^2,x,1\}$\ as a basis for the set of all 2nd-degree polynomials, we can form a coefficient matrix $P$\ and row reduce:
+          \begin{align*}
+              P&=\begin{Mat}{3} 1 & -3 & -10 \\ 0 & 5 & 7 \\ 1 & 12 & 11 \end{Mat}
+              \to\begin{Mat}{3} 5 & -15 & -50 \\ 0 & 5 & 7 \\ 0 & 15 & 21 \end{Mat}
+              \to\begin{Mat}{3} 5 &   0 &  11 \\ 0 & 5 & 7 \\ 0 &  0 &  0 \end{Mat}
+          \end{align*}
+          Thus we see $p_1,p_2$\ are pivot columns and thus $\{x^2-3x-10,5x+7\}$\ form a basis for the vector space.
+      }
+      \newpage
+      \item \Que {
+          Remember that a set of vectors is independent iff the only linear combination to produce $\Vn{0}$\ is the trivial combination.
+          For these vectors, we could try to solve $a_1p_1(x)+a_2p_2(x)+a_3p_3(x)=0$.  
+          Instead, we can form new equations by differentiation.  
+          Explain how to form a system of equations with unknown constants $a_1,a_2,a_3$.
+      }
+      \Ans{
+      \begin{align*}
+         \shortintertext{Our first equation are the linear combinations of the original functions set to zero}
+            a_1(x^2-3x-10)+a_2(5x+7)+a_3(x^2+12x+11) &=0
+         \shortintertext{second equation is derivative of first:}
+            a_1(2x-3)+a_2(5)+a_3(2x+12) &=0
+         \shortintertext{third equation is derivative of second:}
+            a_1(2)+a_2(0)+a_3(2) &= 0
+      \end{align*}
+         Which we can form into a coefficient matrix:
+      \begin{align*}
+           A&=\begin{Mat}{3} x^2-3x-10 & 5x+7 & x^2+12x+11 \\
+                                  2x-3 &    5 &      2x+12 \\
+                                     2 &    0 &          2 \end{Mat}
+       \shortintertext{and find the determinant:}
+         \det A &= 2\left[(5x+7)(2x+12)-(x^2+12x+11)(5)\right] + 2\left[(x^2-3x-10)(5)-(5x+7)(2x-3)\right] \\
+                &= 2\left[10x^2+14x+60x+84-5x^2-60x-55\right] + 2\left[5x^2-15x-50-10x^2-14x+15x+21\right] \\
+                &= (10x^2+28x+58)-(10x^2+28x+58) \\
+                &= 0
+      \end{align*}
+         Thus since $\det A=0$\ it follows that there are an infinite number of solutions to the equations, and thus the functions $p_1,p_2,p_3$\ are dependent.
+      }
+    \item \Que{
+        Consider the vector space spanned by $\mathbb{V}=\{f_1(x),f_2(x),\cdots,f_n(x)\}$, where $f_i(x)$\ is a smooth function of $x$
+        (smooth means you can differentiate as many times as needed).  
+        Explain how you could determine if the set of vectors is linearly independent.
+    }
+    \Ans{
+        for any two functions $f_1,f_2$, we can say they are dependent if there exists some $c\in\mathbb{R}$\ such that $f_1=cf_2$, 
+        which can be written $\frac{f_1}{f_2}=c$.  
+        This implies that the ratio between the two functions is constant, and differentiating both sides results in
+        \[\left(\frac{f_1}{f_2}\right)^\prime = 0\]
+        which evaluates to $f_1f_2^\prime-f_1^\prime f_2=0$.  Note that if we form a matrix
+        \[A=\begin{Mat}{2} f_1 & f_2 \\ f_1^\prime & f_2^\prime \end{Mat}\]
+        We can see that the proceeding equation is equivalent to $\det A=0$.  
+        This extends to $n$\ dimensions, using $n-1$\ derivatives of the functions as required to form an $n\times n$\ matrix to find the determinant.  If this matrix $A$\ has a non-zero determinant, then only the trivial solution exists, and the functions $\{f_1,\cdots f_n\}$\ are independent.  If the determinant is zero, then the functions are dependent.
+        
+    }
+    \end{enumerate}
+    %~\\
+    \newpage
+    \item Given a set of vectors $\mathbb{V}=\{\Vn{v}_1,\Vn{v}_2,\cdots,\Vn{v}_n\}$, where the components of each vector are integers,
+          a lattice consists of the set of all linear combinations of $\mathbb{V}$\ whose coefficients are integers.
+          Let $\Vn{v}_1=\Ve{40,1}, \Vn{v}_2=\Ve{-1,39}$.
+    \begin{enumerate}[label=(\alph*)]
+    \item \Que{
+        Determine which of the following vectors are in a lattice: $\Ve{42,74},\Ve{198,234},\Ve{155,199}$.
+    }
+    \Ans{
+        Let $r,s\in\mathbb{R}$\ such that 
+        \begin{align*}
+            \shortintertext{for $\Ve{42,74}$:}
+            40r-s &= 42\\
+            r + 39s &= 74 \\
+            s &= 40r-42 \\
+            r + 39(40r-42) &= 74 \\
+            1561r &= 1712 \\
+            r &= \frac{1712}{1561} \not\in \mathbb{Z}
+            \shortintertext{Thus $\Ve{42,74}$\ is not in a lattice of $\mathbb{V}$.}
+            \shortintertext{for $\Ve{198,234}$:}
+            40r-s &= 198\\
+            r + 39s &= 234 \\
+            s &= 40r-198 \\
+            r+39(40r-198) &= 234 \\
+            1561r &= 7956 \\
+            r &= \frac{7956}{1561} \not\in\mathbb{Z}
+            \shortintertext{Thus $\Ve{198,234}$\ is not in a lattice of $\mathbb{V}$.}
+            \shortintertext{For $\Ve{155,199}$:}
+            40r-s &= 155 \\
+            r+39s &= 199 \\
+            s &= 40r-155 \\
+            r+39(40r-155) &= 199 \\
+            1561r &= 6244 \\
+            r &= \frac{6244}{1561} = 4 \in\mathbb{Z}
+            \shortintertext{Now solve for s:}
+            s &= 40(4)-155 = 5 \in \mathbb{Z}
+            \shortintertext{Thus $\Ve{155,199}$\ is in a lattice of $\mathbb{V}$.}
+        \end{align*}     
+    }
+    \newpage
+    \item \Que{
+        Given a lattice, the closest vector problem (CVP) requires us to find the lattice vector closest to a given vector.
+        For the points above which are not in the lattice, solve the CVP.
+    }
+    \Ans{
+        \begin{align*}
+            \shortintertext{For $\Vn{x}=\Ve{42,74}$:}
+            r &= \frac{1712}{1561} \approx 1.1217 \\
+            s &= 40\frac{1712}{1561}-42 = \frac{68480-65562}{1561} \approx 1.869
+            \shortintertext{My intuition is that the nearest integers to $r,s$\ will result in the nearest lattice point.}
+            \shortintertext{Try $r^\prime=1, s^\prime=2$.}
+            \Vn{x}^{\prime} &= \Ve{40,1} + 2\Ve{-1,39} = \Ve{38,79} \\
+            \norm{\Vn{x}-\Vn{x}^{\prime\prime}} &= \sqrt{4^2+(-5)^2} = \sqrt{41} \approx 6.4
+            \shortintertext{Thus $\Ve{38,79}$\ is the closest lattice point to $\Ve{42,74}$.}
+            \shortintertext{For $\Vn{y}=\Ve{198,234}$:}
+            r &= \frac{7956}{1561} \approx 5.097 \\
+            s &= \frac{318240-309078}{1561} \approx 5.869
+            \shortintertext{Try $r^\prime = 5, s^\prime=6$.}
+            \Vn{y}^\prime &= 5\Ve{40,1} + 6\Ve{-1,39} = \Ve{200-6,5+234} = \Ve{194,239} \\
+            \norm{\Vn{y}-\Vn{y}^\prime} &= \sqrt{4^2 + (-4)^2} = \sqrt{32} \approx 5.657
+            \shortintertext{Thus $\Ve{194,239}$\ is the closest lattice point to $\Ve{198,234}$.}
+        \end{align*}
+    }
+    \item \Que{
+        Consider the lattice formed by $\Vn{p}_1=\Ve{39,40},\Vn{p}_1=\Ve{77,119}$.
+        Determine which of the points in problem 4a are in the lattice, then solve the CVP for the others.
+    }
+    \Ans{
+    Observe that $\Vn{p}_1 = \Vn{v}_1+\Vn{v}_2$\ and $\Vn{p}_2 = 2\Vn{v}_1+3\Vn{v}_2$.
+    \begin{align*}
+        \shortintertext{For $\Vn{x}=\Ve{42,74}$:}
+        39r + 77s &= 42 \\
+        40r + 119s &= 74 \\
+        r &= \frac{42-77s}{39} \\
+        40(\frac{42-77s}{39}) + 119s &= 74 \\
+        1680 - 3080s + 4641s &= 2886 \\
+        1561s &= 2886-1680=1206 \\
+        s &= \frac{1206}{1561} \approx 0.7725 \not\in\mathbb{Z}\\
+        r &= \frac{42-77\frac{1206}{1561}}{39} = \frac{65562-92862}{60879} \approx -0.448 
+        \shortintertext{Thus $\Ve{42,74}$\ is not a lattice point of $\mathbb{P}$.}
+        \shortintertext{Try $r_\prime=-1,s^\prime=1$:}
+        \Vn{x}^\prime &= -\Ve{39,40}+\Ve{77,119} = \Ve{38,79}
+        \shortintertext{This is the same closest lattice point as in $\mathbb{R}$.}
+        \shortintertext{For $\Vn{y}=\Ve{198,234}$:}
+        39r+77s &= 198 \\
+        40r+119s &= 234 \\
+        r &= \frac{198-77s}{39} \\
+        40\frac{198-77s}{39}+119s &= 234 \\
+        7920 - 3080s + 4641s &= 9126 \\
+        1561s &= 9126 - 7920 = 1206 \\
+        s &= \frac{1206}{1561} \approx 0.7725 \not\in\mathbb{Z} \\
+        r &= \frac{198-77\frac{1206}{1561}}{39} = \frac{309078-92862}{60879} \approx 3.552
+        \shortintertext{Thus $\Ve{198,234}$\ is not a lattice point of $\mathbb{P}$.}
+        \shortintertext{Try $r^\prime=3, s^\prime=1$:}
+        \Vn{y}^\prime &= 3\Ve{39,40}+\Ve{77,119} = \Ve{194,239}
+        \shortintertext{This is the same closest lattice point as in $\mathbb{V}$.}
+        \shortintertext{For $\Vn{z}=\Ve{155,199}$:}
+        39r + 77s &= 155 \\
+        40r + 119s&= 199 \\
+        r &= \frac{155-77s}{39} \\
+        40\frac{155-77s}{39}+119s &= 199\\
+        6200 - 3080s + 4641s &= 7761 \\
+        s &= \frac{1561}{1561} = 1 \in\mathbb{Z}\\
+        r &= \frac{155-77}{39} = 2 \in\mathbb{Z}
+        \shortintertext{Thus $\Ve{155,199}$\ is a lattice point in $\mathbb{P}$.} 
+    \end{align*}
+    }
+    \item \Que{
+        As it turns out, the lattice spanned by the $\Vn{v}_i$\'s is the same lattice spanned by the $\Vn{p}_i$'s.  Prove this.
+        (Suppose $\Vn{x}$\ can be expressed as a linear combination with integer coefficients of $\Vn{v}$'s.  
+        Show that $\Vn{x}$\ can be expressed as a linear combination with integer coefficients of $\Vn{p}$'s,
+        then show that the converse is true. 
+    }
+    \Ans{
+      Let $S = \begin{Mat}{2} 1 & 2 \\ 1 & 3 \end{Mat}$\ be the matrix formed with the coefficients of $\Vn{p}_i=a_i\Vn{v}_1+b_i\Vn{v}_2$\ as columns.  Then
+      \begin{align*}
+          S^{-1} &= \frac{1}{3-2}\begin{Mat}{2} 3 & -1 \\ -2 & 1 \end{Mat} = \begin{Mat}{2} 3 & -1 \\ -2 & 1 \end{Mat}
+          \shortintertext{Is the translation matrix between the basis $\mathbb{V}$\ and $\mathbb{P}$.}
+          \shortintertext{Let $\Vn{x}$\ be a lattice point of $\mathbb{V}$\ such that the coefficients $x_1,x_2\in\mathbb{Z}$.}
+          \Vn{x}_\mathbb{P} &= \begin{Mat}{2} 3 & -1 \\ -2 & 1 \end{Mat}\begin{Mat}{1} x_1 \\ x_2 \end{Mat}
+                             = \begin{Mat}{1} 3x_1-x_2 \\ -2x_1+x_2 \end{Mat}
+          \shortintertext{Since $x_1,x_2\in\mathbb{Z}$, it follows that $3x_1-x_2,-2x_1+x_2\in\mathbb{Z}$\ thus $\Vn{x}$\ is in the lattice of $\mathbb{P}$.} 
+          \shortintertext{Let $\Vn{y}$\ be a lattice point of $\mathbb{P}$\ such that the coefficients $y_1,y_2\in\mathbb{Z}$.}
+          S\Vn{y}_\mathbb{V} &= \begin{Mat}{2} 1 & 2 \\ 1 & 3 \end{Mat}\begin{Mat}{1} y_1 \\ y_2 \end{Mat}
+                             = \begin{Mat}{1} y_1+2y_2 \\ y_1+3y_2 \end{Mat}
+          \shortintertext{Since $y_1,y_2\in\mathbb{Z}$, it follows that $y_1+2y_2,y_1+3y_2\in\mathbb{Z}$\ thus $\Vn{y}$\ is in the lattice of $\mathbb{V}$.}
+      \end{align*}
+          Therefore $\mathbb{V},\mathbb{P}$\ span the same lattice.
+    }
+    \item \Que{
+        Identify an important difference between the vectors $\Vn{v}_i$\ and the vectors $\Vn{p}_i$.  
+        Suggestion:  Given the set of vectors $\Vn{v}_i$, what questions could you ask about them?
+        Then ask the same question about the vectors $\Vn{p}_i$.
+    }    
+    \Ans{  
+      Both sets of vectors are independent.\\
+      Neither set of vectors is orthogonal.\\
+      Both sets of vectors form a basis for $\mathbb{R}^2$.\\
+      Both sets of vectors have non-zero determinant.\\
+      $\mathbb{V}$\ has complex eigenvalues:
+      \begin{align*}
+          \norm{V-\lambda I} &= \begin{vmatrix} 40-\lambda & -1 \\ 1 & 39-\lambda \end{vmatrix} 
+                              = (40-\lambda)(39-\lambda)-(-1)(1)
+                              = \lambda^2-79\lambda+1561
+                              = 0 
+           \shortintertext{use quadratic equation to find roots:}
+           r_\mathbb{V} &= \frac{-(-79)\pm\sqrt{(-79)^2-4(1)(1561)}}{2} 
+                         = \frac{79\pm\sqrt{-3}}{2} \in \mathbb{C}
+           \shortintertext{$\mathbb{P}$\ has real eigenvalues:}
+          \norm{P-\lambda I} &= \begin{vmatrix} 39-\lambda & 77 \\ 40 & 119-\lambda \end{vmatrix}
+                              = (39-\lambda)(119-\lambda)-(77)(40)
+                              = \lambda^2-158\lambda+1561
+                              = 0
+           \shortintertext{use quadratic equation to find roots:}
+           r_\mathbb{P} &= \frac{-(-158)\pm\sqrt{(-158)^2-4(1)(1561)}}{2}
+                         = \frac{158\pm\sqrt{18720}}{2} \in\mathbb{R}
+      \end{align*}
+    }
+    \end{enumerate}
+    ~\\
+    
+    \item Let $A=\begin{Mat}{2} 6 & -5 \\ 10 & -9 \end{Mat}$.
+    \begin{enumerate}[label=(\alph*)]
+    \item \Que{
+        Find the eigenvalues and corresponding eigenvectors of $A$.  
+        Refer to these as $\lambda_1, \lambda_2, \Vn{v}_1, \Vn{v}_2$\ for the following questions.
+    }
+    \Ans{
+    \begin{align*}
+        \norm{(A-\lambda I)} &= (6-\lambda)(-9-\lambda)-(-5)(10) = \lambda^2 +3\lambda-4 = (\lambda+4)(\lambda-1)=0
+        \shortintertext{thus $\lambda_1=-4$\ and $\lambda_2=1$. Now find $\Vn{v}_1$\ for $\lambda_1=-4$: }  
+        &\begin{Mat}{2} 6-(-4) & -5 \\ 10 & -9-(-4) \end{Mat} \to
+         \begin{Mat}{2} 10 & -5 \\ 10 & -5 \end{Mat} \to
+         \begin{Mat}{2} 2 & -1 \\ 0 & 0 \end{Mat}
+        \shortintertext{thus $\Vn{v}_1=\Ve{1,2}$.  Now find $\Vn{v}_2$\ for $\lambda_2=1$:}
+        &\begin{Mat}{2} 6-1 & -5 \\ 10 & -9-1 \end{Mat} \to
+         \begin{Mat}{2} 5 & -5 \\ 10 & -10 \end{Mat} \to
+         \begin{Mat}{2} 1 & -1 \\ 0 & 0 \end{Mat}
+        \shortintertext{thus $\Vn{v}_2=\Ve{1,1}$.}
+    \end{align*}
+    }
+    \newpage
+    \item \Que{
+        Prove or disprove:  The set of eigenvectors you found are independent.
+    }
+    \Ans{
+      Suppose for the sake of contradiction that the eigenvectors are not independent.  
+      Then we can express each in terms of the other (for some $c,d\in\mathbb{R}$):
+      \begin{align*}
+          \Vn{v}_1 &= c\Vn{v}_2 \\
+          \Ve{1,2} &= c\Ve{1,1} \\
+          \Vn{v}_2 &= d\Vn{v}_2 \\
+          \Ve{1,1} &= d\Ve{1,2}
+      \end{align*}
+      Solving this we get $c=1$\ and also $c=2$\; and $d=1$\ and also $d=0.5$\ and thus we have reached a contradiction.
+      Therefore the eigenvectors are independent.
+    }
+    %\newpage
+    \item \Que{
+        Prove or disprove:  The set of eigenvectors you found span $\mathbb{R}^2$.
+    }
+    \Ans{
+        Let $\Vn{x} \in \mathbb{R}^2$.  We want to find $a,b\in\mathbb{R}$\ such that
+        \begin{align*}
+            \Vn{x} &= a\Ve{1,2}+b\Ve{1,1} \\
+               x_1 &= a+b \\
+               x_2 &= 2a+b
+               \shortintertext{and we define the augmented matrix $X$\ as}
+               X &= \begin{Amat}{2} 1 & 1 & x_1 \\ 2 & 1 & x_2 \end{Amat}
+               \to  \begin{Amat}{2} 1 & 1 & x_1 \\ 0 & 1 & 2x_1-x_2 \end{Amat}
+               \to  \begin{Amat}{2} 1 & 0 & x_2-x_1 \\ 0 & 1 & 2x_1-x_2 \end{Amat}
+        \end{align*}      
+        Thus we have found coefficients $a=x_2-x_1$\ and $b=2x_1-x_2$\ and thus the eigenvectors span $\mathbb{R}^2$. 
+    }
+    \item \Que{
+        Let $\Vn{x}=x_1\Vn{v}_1 + x_2\Vn{v}_2$.  Find $A^{100}\Vn{x}$.
+    }
+    \Ans{
+        \begin{align*}
+            A^{100}\Vn{x} &= x_1\lambda_1^{100}\Vn{v}_1 + x_2\lambda_2^{100}\Vn{v}_2 \\
+                          &= x_1(-4)^{100}\Ve{1,2} + x_2(1)^{100}\Ve{1,1}\\
+                          &= x_1\Ve{2^{200},2^{201}} + x_2\Ve{1,1} \\
+                          &= \Ve{2^{200}x_1+x_2,2^{201}x_1+x_2}
+        \end{align*}            
+    }
+    \item \Que{
+        If possible, set up and solve the system of equations that would allow you to express any vector $\Vn{x}$\ as a linear combination
+        of the eigenvectors $\Vn{v}_1,\Vn{v}_2$.
+    }
+    \Ans{
+        This is a task analogous to assignment five problem 2c. Let $\Vn{x}=\Ve{x_1,x_2}\in\mathbb{R}^2$\\
+        Let $S=\begin{Mat}{2}1 & 1 \\ 2 & 1 \end{Mat}$\ be the matrix formed with $\Vn{v}_1,\Vn{v}_2$\ as columns, then
+        \begin{align*}
+            S^{-1}&=\frac{1}{1-2}\begin{Mat}{2} 1 & -1 \\ -2 & 1 \end{Mat} = \begin{Mat}{2} -1 & 1 \\ 2 & -1 \end{Mat}
+        \shortintertext{Is the matrix which transforms a vector from standard basis to the eigenbasis.  Thus the system:}
+            x_1^\prime &= -x_1+x_2 \\
+            x_2^\prime &= 2x_1-x_2
+        \shortintertext{Is the system of equations to express any $\Vn{x}$\ as a linear combination of the eigenvectors:}
+            \Vn{x} &= x_1^\prime\Vn{v}_1+x_2^\prime\Vn{v}_2 = (x_2-x_1)\Vn{v}_1 + (2x_1-x_2)\Vn{v}_2
+        \end{align*}      
+    }
+    \newpage
+    \item \Que{
+        Let $\Vn{y}=\begin{Mat}{1} 3 \\ 1 \end{Mat}$.  Find $A^{100}\Vn{y}$.
+    }
+    \Ans{
+        \begin{align*}
+        \shortintertext{first transform into the eigen basis coordinates:}
+            \Vn{y}_S &= S^{-1}\Vn{y} = \begin{Mat}{2} -1 & 1 \\ 2 & -1 \end{Mat} \begin{Mat}{1} 3 \\ 1 \end{Mat}
+                                     = \begin{Mat}{1} -2 \\ 5 \end{Mat}
+        \shortintertext{then apply the transformation as eigenvalue multiplication}
+            A^{100}\Vn{y}_S &= (-2)\lambda_1^{100}\Vn{v}_1 + (5)\lambda_2^{100}\Vn{v}_2 \\
+                            &= (-2)(-4)^{100}\Ve{1,2}+ (5)(1)^{100}\Ve{1,1} \\
+                            &= \Ve{5-2^{201},5-2^{202}}
+         \shortintertext{Now return to standard basis coordinates:}
+            A^{100}\Vn{y}   &= SA^{100}\Vn{y}_S = \begin{Mat}{2} 1 & 1 \\ 2 & 1 \end{Mat} \begin{Mat}{1} 5-2^{201} \\ 5-2^{202} \end{Mat}
+                             = \begin{Mat}{1} (5-2^{201})-(5-2^{202}) \\ (10-2^{202})-(5-2^{202}) \end{Mat} \\
+                            &= \begin{Mat}{1} 2^{201} \\ 5 \end{Mat}       
+        \end{align*}            
+    }
+    \end{enumerate}
+\end{enumerate} 
+\end{document}  

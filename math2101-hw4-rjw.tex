@@ -1,0 +1,672 @@
+\documentclass{letter}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{bm}
+\usepackage[letterpaper,portrait,left=2cm,right=2cm,top=3.5cm,bottom=2cm]{geometry}
+\pagestyle{fancy}
+
+\fancyhf{}
+\rhead{Robert Wagner\\June 21, 2016}
+\lhead{Math 2101\\Assignment 4}
+\newcounter{question}
+\setcounter{question}{0}
+\usepackage{amsmath,amsthm}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+
+
+% magnitude bars
+\newcommand{\norm}[1]{\lvert #1 \rvert}
+
+% explicit vector
+\newcommand{\Ve}[1]{\langle #1 \rangle}
+
+% named vector
+\newcommand{\Vn}[1]{\vec{\bm{#1}}}
+
+% a line with an arrow above
+\newcommand{\Line}[1]{\overrightarrow{#1}}
+
+% equals with question mark above
+\newcommand{\?}{\stackrel{?}{=}}
+
+% formatting for questions
+\newcommand\Que[1]{%
+   \leavevmode\noindent
+   #1
+}
+
+% formatting for answers
+\newcommand\Ans[2][]{%
+   \leavevmode\noindent
+   {
+       \begin{mdframed}[backgroundcolor=blue!10]
+       #2
+       \end{mdframed}
+   }
+}
+
+% this is like align but squashed     
+\newenvironment{salign}
+ {\par$\!\aligned}
+ {\endaligned$\par}
+
+% a matrix, parameter is column count
+\newenvironment{Mat}[1]{%
+  \left[\begin{array}{*{#1}{r}}
+}{%
+  \end{array}\right]
+}
+
+% an augmented matrix, parameter is non-augmented column count
+\newenvironment{Amat}[1]{%
+  \left[\begin{array}{@{}*{#1}{r}|r@{}}
+}{%
+  \end{array}\right]
+}
+\newenvironment{Amat2}[1]{%
+  \left[\begin{array}{@{~}*{#1}{r}| @{~~}*{#1}{r}}
+}{%
+  \end{array}\right]
+}
+\newenvironment{Amat3}[2]{%
+  \left[\begin{array}{@{~}*{#1}{r}| @{~~}*{#2}{r}}
+}{%
+  \end{array}\right]
+}
+\begin{document}
+
+
+\begin{enumerate}
+    \item Let $A, B, C$\ be the following matrices:
+    \begin{align*}
+    &A= \begin{Mat}{2}
+            3 & 5 \\ 2 & -1
+        \end{Mat}
+    &&B= \begin{Mat}{3}
+            2 & 3 & 1 \\ 1 & 4 & 1
+         \end{Mat}
+    &&C= \begin{Mat}{2}
+            1 & -1 \\ 2 & -1 \\ -3 & 1
+          \end{Mat}     
+    \end{align*}     
+    If possible, find the following.  If not possible, explain why.
+    \begin{enumerate}[label=(\alph*)]
+        \item\Que{
+         $A+B$
+        }
+        \Ans{
+          This operation is not possible as $A, B$ have different dimensions ($2\times 2$\ and $2\times 3$ respectively) and matrix addition is an elementwise operation.
+        }    
+        \item \Que{
+         $-2A$
+        }
+        \Ans{
+            \begin{salign}
+            -2A = 
+              \begin{Mat}{2}
+                -6 & -10 \\ -4 & 2
+              \end{Mat}
+            \end{salign}
+        }
+        \item \Que{
+          $A^2 + A$
+        }
+        \Ans{
+         \begin{salign}
+            A^2+A &=
+            \begin{Mat}{2} 3 & 5 \\ 2 & -1 \end{Mat}
+            \begin{Mat}{2} 3 & 5 \\ 2 & -1 \end{Mat}
+            +
+            \begin{Mat}{2} 3 & 5 \\ 2 & -1 \end{Mat}
+            &=
+            \begin{Mat}{2} 9+10 & 15-5 \\ 6-2 & 10+1 \end{Mat}
+            +
+            \begin{Mat}{2} 3 & 5 \\ 2 & -1 \end{Mat} \\
+            &=
+            \begin{Mat}{2} 22 & 15 \\ 6 & 10 \end{Mat}
+         \end{salign}
+        }
+        \item \Que{
+           $AB$
+        }
+        \Ans{
+          \begin{salign}
+            AB &=
+            \begin{Mat}{2} 3 & 5 \\ 2 & -1 \end{Mat}
+            \begin{Mat}{3} 2 & 3 & 1 \\ 1 & 4 & 1\end{Mat}
+            &=
+            \begin{Mat}{3} 6 + 5 & 9 + 20 & 3 + 5 \\ 4 - 1 & 6 - 4 & 2 -1 \end{Mat} \\
+            &=
+            \begin{Mat}{3} 11 & 29 & 8 \\ 3 & 2 & 1 \end{Mat}
+          \end{salign}
+        }
+        \item \Que{
+           $B^T$
+        }
+        \Ans{
+          \begin{salign}
+            B^T &= \begin{Mat}{2} 2 & 1 \\ 3 & 4 \\ 1 & 1 \end{Mat}
+          \end{salign}
+        }
+        \item \Que{
+           $A(B+C)$
+        }
+        \Ans{
+          This operation is not possible as $B, C$ have different dimensions ($2\times 3$\ and $3\times 2$\ respectively) and matrix addition is an elementwise operation.
+        }
+        \item \Que{
+           $ABC$
+        }
+        \Ans{
+          \begin{salign}
+          ABC &=
+            \begin{Mat}{2} 3 & 5 \\ 2 & -1            \end{Mat}
+            \begin{Mat}{3} 2 & 3 & 1 \\ 1 & 4 & 1     \end{Mat}
+            \begin{Mat}{2} 1 & -1 \\ 2 & -1 \\ -3 & 1 \end{Mat}
+          &=
+            \begin{Mat}{3} 11 & 29 & 8 \\ 3 & 2 & 1 \end{Mat}
+            \begin{Mat}{2} 1 & -1 \\ 2 & -1 \\ -3 & 1 \end{Mat}\\
+          &=
+            \begin{Mat}{2} 11 + 58 - 24 & -11 -29 + 8 \\
+                           3 + 4 - 3    & -3 -2 + 1
+            \end{Mat} \\
+          &=
+            \begin{Mat}{2} 45 & -32 \\ 4 & -4 \end{Mat}     
+          \end{salign}
+        }
+    \end{enumerate}
+    \newpage
+    \item 
+        Given a matrix $M$, the right inverse of $M$\ is a matrix $D$\ where $MD=I$.  The left inverse is a matrix $S$\ where $SM=I$. 
+    \begin{enumerate}[label=(\alph*)]
+    \item \Que{
+        Suppose $M$\ is an $m\times n$\ matrix.  What are the dimensions of $D$\ and $I$?
+    }
+    \Ans{
+       Since $MD=I$\ we know that the row count of $D$\ must match the column count of $M$ which is $n$.  Suppose the column count of $D$\ is $p$.  Then the product $MD$\ of a $m\times n$\ and a $n\times p$\ matrix would be a $m\times p$\ matrix.  Since we know by definition that $I$ is square, it must be the case that $p=m$\ and therefore $D$ must be a $n\times m$ matrix and $I$\ must be a $m\times m$\ matrix. 
+    }
+    \item \Que{
+        Suppose $D=S$\ (in other words, the right and left inverses are the same).  What must be true about $M$?  
+    }
+    \Ans{
+      For $M$\ to have a right inverse $D$\ and a left inverse $S$\ such that $D=S$, it must be the case that $M$ is a square matrix: Since we know from above that if $M$\ is $m\times n$\ then it must be the case that $D$\ is $n\times m$, and also for $SM=I$\ to be true then it must be the case that $S$\ is $n\times m$.  Thus $MD=I^m$\ and $SM=I^n$, and for the two to be equal then $n=m$\ must be true, thus $M, D, S$\ must all be square.
+    }
+    \item \Que{
+        Let $M=\begin{Mat}{2}a & b \\ c & d \end{Mat}$\ and let $D=\begin{Mat}{2} x_1 & x_2 \\ x_3 & x_4 \end{Mat}$\ be a right inverse of $M$.  Write down and solve the system of equations needed to solve for $x_1, x_2, x_3, x_4$.  Also, indicate what must be true in order for the system to be solvable.
+    }
+    \Ans{If it is the case that
+       \begin{align*}
+          MD &= \begin{Mat}{2}a & b \\ c & d \end{Mat}
+                \begin{Mat}{2} x_1 & x_2 \\ x_3 & x_4 \end{Mat}
+             = I = \begin{Mat}{2} 1 & 0 \\ 0 & 1 \end{Mat}
+       \intertext{then we have the following system of equations:}
+          ax_1+bx_3 &= 1 \\
+          ax_2+bx_4 &= 0 \\
+          cx_1+dx_3 &= 0 \\
+          cx_2+dx_4 &= 1 \\
+       \intertext{we can solve with gaussian elimination:}
+       \begin{Amat2}{2} a & b & 1 & 0 \\ c & d & 0 & 1 \end{Amat2} 
+       &\to
+       \begin{Amat2}{2} 1 & \frac{b}{a} & \frac{1}{a} & 0 \\ 1 & \frac{d}{c} & 0 & \frac{1}{c} \end{Amat2} 
+       \to
+       \begin{Amat2}{2} 1 & \frac{b}{a} & \frac{1}{a} & 0 \\ 0 & \frac{d}{c}-\frac{b}{a} & \frac{-1}{a} & \frac{1}{c} \end{Amat2} \\
+       &\to
+       \begin{Amat2}{2} 1 & \frac{b}{a} & \frac{1}{a} & 0 \\ 0 & \frac{ad-bc}{ac} & \frac{-c}{ac} & \frac{a}{ac} \end{Amat2}
+       \to
+       \begin{Amat2}{2} 1 & \frac{b}{a} & \frac{ad-bc}{a(ad-bc)} & 0 \\ 0 & 1 & \frac{-c}{ad-bc} & \frac{a}{ad-bc} \end{Amat2} \\  
+       &\to
+       \begin{Amat2}{2} 1 & 0 & \frac{ad-bc+bc}{a(ad-bc)} & \frac{-b}{ad-bc} \\ 0 & 1 & \frac{-c}{ad-bc} & \frac{a}{ad-bc} \end{Amat2}
+       \to
+       \begin{Amat2}{2} 1 & 0 & \frac{d}{ad-be} & \frac{-b}{ad-bc} \\ 0 & 1 & \frac{-c}{ad-bc} & \frac{a}{ad-bc} \end{Amat2} \\
+       &\to \frac{1}{ad-bc}\begin{Amat2}{2} 1 & 0 & d & -b \\ 0 & 1 & -c & a \end{Amat2}
+       \intertext{thus we have found a unique solution}
+       D &= \frac{1}{ad-bc}\begin{Mat}{2} d & -b \\ -c & a \end{Mat}
+       \end{align*}
+       Since we cannot divide by zero, in order to solve this system it must be the case that $ad-bc \not = 0$.
+    }
+    \newpage
+    \item \Que{
+        Show that the matrix $D$\ you found is also a left inverse.  (Consequently, we'll just say its an inverse of $M$\ and write it as $M^{-1}$.
+    }
+    \Ans{
+    \begin{align*}
+    DM &= 
+       \left(\frac{1}{ad-bc}\begin{Mat}{2} d & -b \\ -c & a \end{Mat} \right)\begin{Mat}{2} a & b \\ c & d \end{Mat}
+       = 
+       \frac{1}{ad-bc} \left(\begin{Mat}{2} d & -b \\ -c & a \end{Mat}\begin{Mat}{2} a & b \\ c & d \end{Mat}\right)
+       \\ &=
+       \frac{1}{ad-bc}\begin{Mat}{2} da-bc & db-bd \\ -ca+ac & -cb+ad \end{Mat}
+       =
+       \frac{1}{ad-bc}\begin{Mat}{2} ad-bc & 0 \\ 0 & ad-bc \end{Mat}
+       \\&=
+       \begin{Mat}{2} 1 & 0 \\ 0 & 1 \end{Mat}
+       = I
+    \end{align*}
+    Thus $D$ is also a left inverse, and thus an inverse of $M$.
+    }
+    \item \Que{
+        If possible, find $A^{-1}$\ for the matrix $A$\ above.
+    }    
+    \Ans{
+    \begin{align*}
+    A&= \begin{Mat}{2}
+            3 & 5 \\ 2 & -1
+        \end{Mat}
+    \intertext{note that}
+    ad-bc &= (3)(-1)-(5)(2) = -13 \not = 0
+    \intertext{therefore we can find an inverse.}
+    A^{-1}
+    &=
+    \frac{1}{ad-bc}\begin{Mat}{2} d & -b \\ -c & a \end{Mat}
+    = 
+    -\frac{1}{13}\begin{Mat}{2}-1 & -5 \\ -2 & 3 \end{Mat}
+    =
+    \frac{1}{13}\begin{Mat}{2} 1 & 5 \\ 2 & -3 \end{Mat}    
+    \end{align*}
+    }
+    \item \Que{
+        If possible, find the right inverse of $B$, for the matrix $B$\ above.
+    }
+    \Ans{
+    We need to find $S$ such that $BS=I$.  Since $B$\ is a $2\times 3$\ matrix, it follows that $S$\ will be a $3\times 2$\ matrix and subsequently $I$\ will be a $2\times 2$\ matrix.
+    \begin{align*}
+    BS&= 
+      \begin{Mat}{3} 2 & 3 & 1 \\ 1 & 4 & 1 \end{Mat}
+      \begin{Mat}{2} s_{11} & s_{12} \\ s_{21} & s_{22} \\ s_{31} & s_{32} \end{Mat}
+      =
+      \begin{Mat}{2} 2s_{11}+3s_{21}+1s_{31} & 2s_{12}+3s_{22}+1s_{32} \\ 
+                     1s_{11}+4s_{21}+1s_{31} & 1s_{12}+4s_{22}+1s_{32} \end{Mat}
+      = I = \begin{Mat}{2} 1 & 0 \\ 0 & 1 \end{Mat}
+      \intertext{then we have the following system of equations:}
+                     &2s_{11}+3s_{21}+1s_{31} = 1 \\
+                     &2s_{12}+3s_{22}+1s_{32} = 0 \\
+                     &1s_{11}+4s_{21}+1s_{31} = 0 \\
+                     &1s_{12}+4s_{22}+1s_{32} = 1
+      \intertext{which we can solve with gaussian elimination}  
+      &\begin{Amat3}{3}{2} 2 & 3 & 1 & 1 & 0 \\ 1 & 4 & 1 & 0 & 1 \end{Amat3}
+      \to
+      \begin{Amat3}{3}{2} 1 & -1 & 0 & 1 & -1 \\ 0 & 5 & 1 & -1 & 2 \end{Amat3}
+      \to
+      \begin{Amat3}{3}{2} 1 & -1 & 0 & 1 & -1 \\ 0 & 1 & 1/5 & -1/5 & 2/5 \end{Amat3}
+      \to
+      \\&
+      \begin{Amat3}{3}{2} 1 & 0 & 1/5 & 4/5 & -3/5 \\ 0 & 1 & 1/5 & -1/5 & 2/5 \end{Amat3}
+      \to
+      \begin{Amat3}{3}{2} 5 & 0 & 1 & 4 & -3 \\ 0 & 5 & 1 & -1 & 2 \end{Amat3}
+      \intertext{to parameterize, let $r=s_{31},~t=s_{32}$.  Then}
+      &5s_{11}+r = 4  \to s_{11} = \frac{4-r}{5}  \\
+      &5s_{12}+t = -3 \to s_{12} = \frac{-3-t}{5} \\
+      &5s_{21}+r = -1 \to s_{21} = \frac{-1-r}{5} \\
+      &5s_{22}+t = 2  \to s_{22} = \frac{2-t}{5}
+      \intertext{thus we can write the set of right inverses as (for all $r,t \in \mathbb{R}$)}
+      &S = \frac{1}{5}\begin{Mat}{2} 4 & -3 \\ -1 & 2 \\ 0 & 0 \end{Mat}
+      +
+      \frac{r}{5}\begin{Mat}{2} -1 & 0 \\ -1 & 0 \\ 1 & 0 \end{Mat}
+      +
+      \frac{t}{5}\begin{Mat}{2} 0 & -1 \\ 0 & -1 \\ 0 & 1 \end{Mat}
+      \intertext{to verify with $r=t=0$:}
+      &BS =
+      \begin{Mat}{3} 2 & 3 & 1 \\ 1 & 4 & 1 \end{Mat}
+      \left(\frac{1}{5}\begin{Mat}{2} 4 & -3 \\ -1 & 2 \\ 0 & 0 \end{Mat}\right)
+      =
+      \frac{1}{5}\left(\begin{Mat}{3} 2 & 3 & 1 \\ 1 & 4 & 1 \end{Mat}
+                       \begin{Mat}{2} 4 & -3 \\ -1 & 2 \\ 0 & 0 \end{Mat}\right)
+      \\&=
+      \frac{1}{5}\left(\begin{Mat}{2} 2\cdot 4 + 3\cdot -1 + 1\cdot 0 & 2\cdot -3 + 3\cdot 2 + 1\cdot 0 \\
+                                      1\cdot 4 + 4\cdot -1 + 1\cdot 0 & 1\cdot -3 + 4\cdot 2 + 1\cdot 0
+                       \end{Mat}\right)
+      =
+      \frac{1}{5}\begin{Mat}{2} 5 & 0 \\ 0 & 5 \end{Mat}
+      \\&=
+      \begin{Mat}{2} 1 & 0 \\ 0 & 1 \end{Mat} = I
+      \intertext{thus we have shown that there are an infinite number of right inverses for B.}                 
+    \end{align*}
+    }
+    \item \Que{
+        If possible, find $(CB)^{-1}$.
+    }
+    \Ans{
+    \begin{align*}
+      CB &= \begin{Mat}{2} 1 & -1 \\ 2 & -1 \\ -3 & 1 \end{Mat}
+           \begin{Mat}{3} 2 & 3 & 1 \\ 1 & 4 & 1 \end{Mat}
+         = \begin{Mat}{3} 2-1 & 3-4 & 1-1 \\ 4-1 & 6-4 & 2-1 \\ 1-6 & 4-9 & 1-3 \end{Mat}
+         = \begin{Mat}{3} 1 & -1 & 0 \\ 3 & 2 & 1 \\ -5 & -5 & -2 \end{Mat}
+      \intertext{to find $(CB)^{-1}$ we need to solve the system}
+      &\begin{Amat2}{3} 1 & -1 &  0 & 1 & 0 & 0 \\
+                        3 &  2 &  1 & 0 & 1 & 0 \\
+                       -5 & -5 & -2 & 0 & 0 & 1 \end{Amat2}
+      \to
+      \begin{Amat2}{3} 1 &  -1 &  0 &  1 & 0 & 0 \\
+                       0 &   5 &  1 & -3 & 1 & 0 \\
+                       0 & -10 & -2 &  5 & 0 & 1 \end{Amat2}
+      \to\\
+      &\begin{Amat2}{3} 1 & -1 & 0 &  1 & 0 & 0 \\
+                        0 &  5 & 1 & -3 & 1 & 0 \\
+                        0 &  0 & 0 & -1 & 2 & 1 \end{Amat2}
+      \intertext{and we have reached a contradiction, therefore there is no inverse $(CB)^{-1}$.}
+    \end{align*}
+    }
+    \end{enumerate}
+    \newpage
+    \item 
+      Determine whether the statement is true.  If the statement is true, prove it.  If the statement is false, find the correct expression for the right side and prove your result.  You may assume $P, Q$\ are invertible matrices of the appropriate size for addition / multiplication. 
+    \begin{enumerate}[label=(\alph*)]        
+    \item \Que{
+        $(P^{-1})^{-1} = P$
+    }
+    \Ans{
+      Let $Q=P^{-1}$.  then
+      \begin{align*}
+      Q^{-1}Q &= I
+      \shortintertext{which can be rewritten as}
+      Q^{-1}P^{-1} &= I 
+      \shortintertext{multiply $P$\ by both sides to get}
+      Q^{-1}P^{-1}P &= IP
+      \shortintertext{which simplifies to}
+      Q^{-1}&=P
+      \shortintertext{thus}
+      (P^{-1})^{-1}&=P \qed
+      \end{align*}
+    }
+    \item \Que{
+        $(PQ)^{-1}=P^{-1}Q^{-1}$
+    }
+    \Ans{
+      The correct identity is $(PQ)^{-1} = Q^{-1}P^{-1}$\ as shown below.
+      \begin{align*}
+      PQ(PQ)^{-1} &= I 
+      \shortintertext{multiply both sides by $P^{-1}$ and simplify:}
+      P^{-1}PQ(PQ)^{-1} &= P^{-1}I \\
+      Q(PQ)^{-1} &= P^{-1}
+      \shortintertext{multiply both sides by $Q^{-1}$ and simplify:}
+      Q^{-1}Q(PQ)^{-1} &= Q^{-1}P^{-1} \\
+      (PQ)^{-1} &= Q^{-1}P^{-1}
+      \qed
+      \end{align*}
+    }
+    \item \Que{
+         $aP + bP = (a+b)P$\ (where $a,b \in \mathbb{R}$).
+    }
+    \Ans{
+      \begin{align*}
+        aP + bP &= a\begin{Mat}{3} p_{11}  & \cdots & p_{1m}  \\
+                                   \vdots  & \ddots & \vdots \\
+                                   p_{n1}  & \cdots & p_{nm} \end{Mat} 
+                 + b\begin{Mat}{3} p_{11}  & \cdots & p_{1m}  \\
+                                   \vdots  & \ddots & \vdots \\
+                                   p_{n1}  & \cdots & p_{nm} \end{Mat}
+              \\&= \begin{Mat}{3}  ap_{11} & \cdots & ap_{1m}  \\
+                                   \vdots  & \ddots & \vdots \\
+                                   ap_{n1} & \cdots & ap_{nm} \end{Mat}
+                  +\begin{Mat}{3}  bp_{11} & \cdots & bp_{1m}  \\
+                                   \vdots  & \ddots & \vdots \\
+                                   bp_{n1} & \cdots & bp_{nm} \end{Mat}                                                   
+              \\&= \begin{Mat}{3}  ap_{11}+bp_{11} & \cdots & ap_{1m}+bp_{1m}  \\
+                                   \vdots  & \ddots & \vdots \\
+                                   ap_{n1}+bp_{n1} & \cdots & ap_{nm}+bp_{nm} \end{Mat}
+              = \begin{Mat}{3} (a+b)p_{11} & \cdots & (a+b)p_{1m} \\
+                                  \vdots      & \ddots & \vdots      \\
+                                  (a+b)p_{b1} & \cdots & (a+b)p_{nm} \end{Mat}
+              \\&=(a+b)\begin{Mat}{3} p_{11}  & \cdots & p_{1m}  \\
+                                   \vdots  & \ddots & \vdots \\
+                                   p_{n1}  & \cdots & p_{nm} \end{Mat}
+              =(a+b)P \qed                                                                
+      \end{align*}
+    }
+    \newpage
+    \item \Que{
+        $(P^T)^T=P$  
+    }
+    \Ans{Let $P$\ be a $n\times m$\ matrix and define $Q=P^T$\ to be the $m\times n$\ transpose of $P$.  Then if 
+    \begin{align*}
+        P&=\begin{Mat}{4} p_{11} & p_{12} & \cdots & p_{1m} \\
+                          p_{21} & p_{22} & \cdots & p_{2m} \\
+                          \vdots & \vdots  & \ddots & \vdots \\
+                          p_{n1} & p_{n2} & \cdots & p_{nm} \end{Mat}
+        \shortintertext{then}
+        Q &= \begin{Mat}{4} p_{11} & p_{21} & \cdots & p_{n1} \\
+                            p_{12} & p_{22} & \cdots & p_{n2} \\
+                            \vdots & \vdots & \ddots & \vdots \\
+                            p_{1m} & p_{2m} & \cdots & p_{nm} \end{Mat}
+        \shortintertext{then transposing $Q$ we get}
+        Q^T &=\begin{Mat}{4} p_{11} & p_{12} & \cdots & p_{1m} \\
+                             p_{21} & p_{22} & \cdots & p_{2m} \\
+                             \vdots & \vdots & \ddots & \vdots \\
+                             p_{n1} & p_{n2} & \cdots & p_{nm} \end{Mat}
+        \shortintertext{thus we find}
+        Q^T&=P \qed                                   
+    \end{align*}                  
+    }
+    \item \Que{
+        If $PP^{-1}=I$, then $P^{-1}P=I$  
+    } 
+    \Ans{Suppose $PP^{-1}=I$.
+    \begin{align*}
+       PP^{-1} &= I 
+       \shortintertext{multiply both sides by $P^{-1}$ and substitute I:}
+       P^{-1}PP^{-1} &= P^{-1}I \\
+       IP^{-1} &= P^{-1}PP^{-1}
+       \shortintertext{multiply $P$\ by both sides and simplify:}
+       IP^{-1}P &= P^{-1}PP^{-1}P \\
+       P^{-1}P &= II \\
+       P^{-1}P &= I \qed
+    \end{align*}  
+    }
+    \end{enumerate}
+    ~\\
+    \item
+        Verify that each is a vector space, OR explain why it is not. 
+    \begin{enumerate}[label=(\alph*)]
+    \item \Que{
+        The set of polynomials with integer coefficients, under the standard addition of polynomials.    
+    }
+    \Ans{
+    
+    This is not a vector space since \textbf{it is not closed under scalar multiplication.}
+    Let $\mathbb{P}$\ be the set of polynomials with integer coefficients, 
+    and let $\Vn{p} \in \mathbb{P}$\ be a polynomial such that \[\Vn{p}=p_0+p_1x^1+p_2x^2+...+p_nx^n \text{ for all } x\in\mathbb{R}\] where $p_0,p_1,...,p_n \in \mathbb{Z}$.  Let $c \in \mathbb{R}$ be defined as $c = \pi$.  Note that $c$ is irrational, and thus the scalar product \[c\Vn{p}=cp_0+cp_1x^1+cp_2x^2+...+cp_nx^n \text{ for all } x\in\mathbb{R}\] does not have integer coefficients, thus $c\Vn{p} \not\in \mathbb{P}$\ and therefore $\mathbb{P}$\ is not closed under scalar multiplication and is not a vector space.
+        
+    }
+    \item \Que{
+        The set of $3\times 3$\ matrices, under matrix addition.
+    }
+    \Ans{Let $\mathbb{M}_3$\ be the set of $3\times 3$\ matrices, $C,D,E \in \mathbb{M}_3$, and $z,w \in \mathbb{R}$.
+      \begin{align*}
+        \shortintertext{the set is closed under addition:}
+        C + D &= \Ve{c_{11} + d_{11}, c_{12}+d_{12},\cdots,c_{33}+d_{33}} \in \mathbb{M}_3
+        \shortintertext{the set is closed under scalar multiplication:}
+        zC &= z\Ve{c_{11},c_{12},\cdots,c_{33}} = \Ve{zc_{11},zc_{12},\cdots,zc_{33}} \in \mathbb{M}_3
+        \shortintertext{the set of commutative:}
+        C+D &= \Ve{c_{11},c_{12},\cdots,c_{33}} + \Ve{d_{11},d_{12},\cdots,d_{33}} 
+             = \Ve{c_{11}+d_{11}, c_{12}+d_{12},\cdots,c_{33}+d_{33}}\\
+            &= \Ve{d_{11}+c_{11}, d_{12}+c_{12},\cdots,d_{33}+c_{33}}
+             = \Ve{d_{11},d_{12},\cdots,d_{33}} + \Ve{c_{11},c_{12},\cdots,c_{33}}
+             \\&= D+C
+        \shortintertext{the set is associative:}
+        (C+D)+E &= (\Ve{c_{11},c_{12},\cdots,c_{33}} + \Ve{d_{11},d_{12},\cdots,d_{33}}) + 
+                    \Ve{e_{11},e_{12},\cdots,e_{33}} \\
+                &= (\Ve{c_{11}+d_{11},c_{12}+d_{12},\cdots,c_{33}+d_{33}} + 
+                    \Ve{e_{11},e_{12},\cdots,e_{33}} \\
+                &= \Ve{c_{11}+d_{11}+e_{11},c_{12}+d_{12}+e_{12},\cdots,c_{33}+d_{33}+e_{33}} \\
+                &= \Ve{c_{11},c_{12},\cdots,c_{33}}+\Ve{d_{11}+e_{11},d_{12}+e_{12},\cdots,d_{33}+e_{33}} \\
+                &= \Ve{c_{11},c_{12},\cdots,c_{33}} + 
+                  (\Ve{d_{11},d_{12},\cdots,d_{33}}+\Ve{e_{11},e_{12},\cdots,e_{33}}) \\
+                &= C+(D+E)  
+         \shortintertext{the set contains a zero vector such that $C+\Vn{0}=C$:}
+         \Vn{0} &= \Ve{0,0,0,0,0,0,0,0,0} \\
+         C+\Vn{0} &= \Ve{c_{11},c_{12},\cdots,c_{33}} + \Ve{0,0,\cdots,0}
+         =  \Ve{c_{11}+0,c_{12}+0,\cdots,c_{33}+0}
+         = C
+         \shortintertext{the set contains additive inverses for all members:}
+         C^\prime &= (-1)C\\
+         C + C^\prime &= \Ve{c_{11},c_{12},\cdots,c_{33}} + (-1)\Ve{c_{11},c_{12},\cdots,c_{33}} \\
+         &= \Ve{c_{11}-c_{11},c_{12}-c_{12},\cdots,c_{33}-c_{33}} = \Vn{0}
+         \shortintertext{multiplication by 1 is idempotent:}
+         1C &= 1\Ve{c_{11},c_{12},\cdots,c_{33}}=\Ve{1\cdot c_{11},1\cdot c_{12},\cdots,1 \cdot c_{33}}
+            = C
+         \shortintertext{the set is associative of scalar multiplication:}
+         z(wC) &= z(w\Ve{c_{11},c_{12},\cdots,c_{33}})=z\Ve{wc_{11},wc_{12},\cdots,wc_{33}}\\
+               &= zw(\Ve{c_{11},c_{12},\cdots,c_{33}}) = (zw)C
+         \shortintertext{the set is distributive of scalar over vector:}
+         z(C+D) &= z(\Ve{c_{11},c_{12},\cdots,c_{33}}+\Ve{d_{11},d_{12},\cdots,d_{33}}) \\
+         &= z\Ve{c_{11}+d_{11},c_{12}+d_{12},\cdots,c_{33}+d_{33}} \\
+         &= \Ve{zc_{11}+zd_{11},zc_{12}+zd_{12},\cdots,zc_{33}+zd_{33}} \\
+         &= \Ve{zc_{11},zc_{12},\cdots,zc_{33}} + \Ve{zd_{11},zd_{12},\cdots,zd_{33}} 
+         = zC+zD
+         \shortintertext{the set is distributive of vector over scalar:}
+         (z+w)C &= (z+w)\Ve{c_{11},c_{12},\cdots,c_{33}} 
+         = \Ve{(z+w)c_{11},(z+w)c_{12},\cdots,(z+w)c_{33}} \\ 
+         &= \Ve{zc_{11}+wc_{11},zc_{12}+wc_{12},\cdots,zc_{33}+wc_{33}} \\
+         &= \Ve{zc_{11},zc_{12},\cdots,zc_{33}} + \Ve{wc_{11},wc_{12},\cdots,wc_{33}} 
+         = zC+wC
+         \shortintertext{thus the set is a vector space.}
+       \end{align*} 
+    }
+    \newpage
+    \item \Que{
+        The set of invertible $4\times 4$\ matrices, under matrix addition.    
+    }
+    \Ans{
+        Let $\mathbb{M}_4$\ be the set of invertible $4\times 4$\ matrices. 
+        Since \textbf{the zero vector is not invertible}, and therefore $\Vn{0}\not\in \mathbb{M}_4$\ and subsequently $\mathbb{M}_4$\ is not a vector space.
+    }
+    \item \Que{
+        The set of polynomials with real coefficients, where, given two polynomials $f, g$\ we define $+$\ as $f+g=\frac{d}{dx}(fg)$       
+    }
+    \Ans{Let $\mathbb{P}$\ be the set described.
+      This is not a vector space since there exists no zero vector $\Vn{0} \in \mathbb{P}$ such that $f + \Vn{0} = f$.
+      \begin{align*}
+          f &= f_0 + f_1x + f_2x^2 + \cdots + f_nx^n \\
+          \Vn{0} &= z_0 + z_1x + z_1x^2 + \cdots + z_nx^n \\
+          f + \Vn{0} &= \frac{d}{dx}\left[(f_0 + f_1x + \cdots + f_nx^n)(z_0+z_1x+\cdots+z_nx^n) \right] \\
+          &= \frac{d}{dx}[(f_0z_0) + (f_0z_1+f_1z_0)x + (f_0z_2+f_1z_1+f_2z_0)x^2 + \cdots + \\
+                               &~~~~~~~~~(f_{n-2}z_n+f_{n-1}z_{n-1}+f_nz_{n-2})x^{n-2} +
+                                (f_{n-1}z_n+f_nz_{n-1})x^{2n-1} + (f_nz_n)x^{2n}] \\
+          &= (f_0z_1+f_1z_0) + 2(f_0z_2+f_1z_1+f_2z_0)x + \cdots + \\
+                               &~~~~(2n-1)(f_{n-1}z_n+f_nz_{n-1})x^{2n-2} +
+             (2n)(f_nz_n)x^{2n-1}                      
+      \end{align*}
+      We can see that $f_0$\ would require $z_1=1$\ and $f_1$\ would require $z_1=1/2$, and both cannot be the case.
+      }
+    \item \Que{
+        The set of polynomials with real coefficients, where, given two polynomials $f, g$\ we define $+$\ as $f'g'$
+    }
+    \Ans{
+     Let $\mathbb{P}$\ be the set described.  This is not a vector space since there exists no zero vector $\Vn{0} \in \mathbb{P}$ such that $f + \Vn{0} = f$.
+      \begin{align*}
+          f &= f_0 + f_1x + f_2x^2 + \cdots + f_nx^n \\
+          \Vn{0} &= z_0 + z_1x + z_1x^2 + \cdots + z_nx^n \\
+          f + \Vn{0} &= \frac{d}{dx}[(f_0 + f_1x + \cdots + f_nx^n)]
+                        \cdot
+                        \frac{d}{dx}[(z_0+z_1x+\cdots+z_nx^n)] \\
+          &= (f_1 + \frac{f_2x}{2} + \frac{f_3x^2}{3} + \cdots + \frac{f_{n}x^{n-1}}{n}) \cdot
+             (z_1 + \frac{z_2x}{2} + \frac{z_3x^2}{3} + \cdots + \frac{z_{n}x^{n-1}}{n}) \\
+          &= (f_1z_1) + (\frac{f_1z_2+f_2z_1}{2})x + (\frac{f_1z_3+f_2z_2+f_3z_1}{3})x^2+\cdots
+          \intertext{which results in the system of equations if we define $f=f+\Vn{0}$}
+          f_0&=f_1z_1 \\
+          f_1&=\frac{f_1z_2+f_2z_1}{2} \\
+          f_2&=\frac{f_1z_3+f_2z_2+f_3z_1}{3} \\
+          &\vdots
+          \shortintertext{since $z_1=\frac{f_0}{f_1}$\ is not defined when $f_1=0$, it follows that no such $\Vn{0}$\ exists which satisfies $f=f+\Vn{0}$\ for all polynomials with real coefficients.}
+      \end{align*}
+    }
+    \end{enumerate}
+    \newpage
+    \item Let $\Vn{v_1}=\Ve{2,1,0}$, $\Vn{v_2}=\Ve{1,0,-1}$, and $\Vn{v_3}=\Ve{3,1,-1}$.
+    \begin{enumerate}[label=(\alph*)]
+    \item \Que{
+        Prove or disprove: The set of linear combinations of $\Vn{v_1}, \Vn{v_2}, \Vn{v_3}$\ forms a vector space, using the ordinary definitions for vector addition and scalar multiplication.
+    }
+    \Ans{
+      Let $\mathbb{V}$\ be the set of linear combinations of $\Vn{v_1}, \Vn{v_2}, \Vn{v_3}$, $\Vn{c}, \Vn{d}, \Vn{e} \in \mathbb{V}$\ be vectors, and $z,w\in\mathbb{R}$.
+      \begin{align*}
+        \shortintertext{the set is closed under addition:}
+        \Vn{c} + \Vn{d} &= (c_1\Vn{v}_1 + c_2\Vn{v}_2 + c_3\Vn{v}_3) + (d_1\Vn{v}_1 + d_2\Vn{v}_2 + d_3\Vn{v}_3)\\
+        &= (c_1+d_1)\Vn{v}_1 + (c_2+d_2)\Vn{v}_2 + (c_3+d_3)\Vn{v}_3 \in \mathbb{V}
+        \shortintertext{the set is closed under scalar multiplication:}
+        z\Vn{c} &= z(c_1\Vn{v}_1 + c_2\Vn{v}_2 + c_3\Vn{v}_3)
+        = (zc_1)\Vn{v}_1 + (zc_2)\Vn{v}_2 + (zc_3)\Vn{v}_3 \in \mathbb{V}
+        \shortintertext{the set of commutative:}
+        \Vn{c}+\Vn{d} &= (c_1\Vn{v}_1+c_2\Vn{v}_2+c_3\Vn{v}_3)+(d_1\Vn{v}_1+d_2\Vn{v}_2+d_3\Vn{v}_3) \\
+        &= (c_1+d_1)\Vn{v}_1 + (c_2+d_2)\Vn{v}_2 + (c_3+d_3)\Vn{v}_3 \\
+        &= (d_1+c_1)\Vn{v}_1 + (d_2+c_2)\Vn{v}_2 + (d_3+c_3)\Vn{v}_3 \\
+        &= (d_1\Vn{v}_1 + d_2\Vn{v}_2+d_3\Vn{v}_3)+(c_1\Vn{v}_1+c_2\Vn{v}_2+c_3\Vn{v}_3) 
+        = \Vn{d}+\Vn{c}
+        \shortintertext{the set is associative:}
+        (\Vn{c}+\Vn{d})+\Vn{e} &= (c_1\Vn{v}_1+c_2\Vn{v}_2+c_3\Vn{v}_3+d_1\Vn{v}_1+d_2\Vn{v}_2+d_3\Vn{v}_3)+
+         e_1\Vn{v}_1+e_2\Vn{v}_2+e_3\Vn{v}_3 \\
+         &= (c_1+d_1+e_1)\Vn{v}_1 + (c_2+d_2+e_2)\Vn{v}_2 + (c_3+d_3+e_3)\Vn{v}_3 \\
+         &= (d_1\Vn{v}_1+d_2\Vn{v}_2+d_3\Vn{v}_3+e_1\Vn{v}_1+e_2\Vn{v}_2+e_3\Vn{v}_3)+
+         c_1\Vn{v}_1+c_2\Vn{v}_2+c_3\Vn{v}_3 \\
+         &= \Vn{c} + (\Vn{d}+\Vn{e})
+         \shortintertext{the set contains a zero vector such that $\Vn{c}+\Vn{0}=\Vn{c}$:}
+         \Vn{0} &= \Ve{0,0,0} \\
+         \Vn{c}+\Vn{0} &= (c_1\Vn{v}_1+c_2\Vn{v}_2+c_3\Vn{v}_3) + (0\Vn{v}_1+0\Vn{v}_2+0\Vn{v}_3) \\
+         &= (c_1+0)\Vn{v}_1+(c_2+0)\Vn{v}_2+(c_3+0)\Vn{v}_3 
+         = \Vn{c}
+         \shortintertext{the set contains additive inverses for all members:}
+         \Vn{c}^\prime &= (-1)\Vn{c}\\
+         \Vn{c} + \Vn{c}^\prime &= (c_1\Vn{v}_1+c_2\Vn{v}_2+c_3\Vn{v}_3)+(-1)(c_1\Vn{v}_1+c_2\Vn{v}_2+c_3\Vn{v}_3)\\
+         &= (c_1-c_1)\Vn{v}_1 + (c_2-c_2)\Vn{v}_2+(c_3-c_3)\Vn{v}_3 \\
+         &= 0\Vn{v}_1+0\Vn{v}_2+0\Vn{v}_3
+         = \Vn{0}
+         \shortintertext{multiplication by 1 is idempotent:}
+         \Vn{c}\cdot 1 &= (c_1\cdot 1)\Vn{v}_1 + (c_2\cdot 2)\Vn{v}_2 + (c_3\cdot 3)\Vn{v}_3
+         = c_1\Vn{v}_1+c_2\Vn{v}_2+c_3\Vn{v}_3
+         = \Vn{c}
+         \shortintertext{the set is associative of scalar multiplication:}
+         z(w\Vn{c}) &= z(wc_1\Vn{v}_1+wc_2\Vn{v}_2+wc_3\Vn{v}_3) 
+         = (zw)(c_1\Vn{v}_1+c_2\Vn{v}_2+c_3\Vn{v}_3)
+         = (zw)\Vn{c} 
+         \shortintertext{the set is distributive of scalar over vector:}
+         z(\Vn{c}+\Vn{d}) &= z(c_1\Vn{v}_1+c_2\Vn{v}_2+c_3\Vn{v}_3+d_1\Vn{v}_1+d_2\Vn{v}_2+d_3\Vn{v}_3) \\
+         &= zc_1\Vn{v}_1+zc_2\Vn{v}_2+zc_3\Vn{v}_3+zd_1\Vn{v}_1+zd_2\Vn{v}_2+zd_3\Vn{v}_3 \\
+         &= (zc_1\Vn{v}_1+zc_2\Vn{v}_2+zc_3\Vn{v}_3)+(zd_1\Vn{v}_1+zd_2\Vn{v}_2+zd_3\Vn{v}_3) 
+         = z\Vn{c}+z\Vn{d}
+         \shortintertext{the set is distributive of vector over scalar:}
+         (z+w)\Vn{c} &= (z+w)(c_1\Vn{v}_1 + c_2\Vn{v}_2 + c_3\Vn{v}_3) \\
+         &= zc_1\Vn{v}_1+zc_2\Vn{v}_2+zc_3\Vn{v}_3+wc_1\Vn{v}_1+wc_2\Vn{v}_2+wc_3\Vn{v}_3 \\
+         &= z(c_1\Vn{v}_1+c_2\Vn{v}_2+c_3\Vn{v}_3+w(c_1\Vn{v}_1+c_2\Vn{v}_3+c_3\Vn{v}_3)
+         = z\Vn{c} + w\Vn{c}
+      \end{align*}
+    }
+    \item \Que{
+       Find the vectors $\Ve{x,y,z}$\ that can be written as a linear combination of $\Vn{v}_1, \Vn{v}_2, \Vn{v}_3$.   
+    }
+    \Ans{For some $a,b,c \in \mathbb{R}$\ we can define a vector
+      \begin{align*}
+        \Ve{x,y,z} &= a\Vn{v}_1+b\Vn{v}_2+c\Vn{v}_3 = a\Ve{2,1,0} + b\Ve{1,0,-1}+c\Ve{3,1,-1}
+        \intertext{we can form a system of equations}
+        2a+1b+3c &= x \\
+        1a+0b+1c &= y \\
+        0a+(-1)b+(-1)c &= z
+        \intertext{which can be solved using gaussian reduction}
+        M&=\begin{Amat}{3} 2 &  1 &  3 & x \\
+                          1 &  0 &  1 & y \\
+                          0 & -1 & -1 & z \end{Amat}
+        \to
+          \begin{Amat}{3} 1 &  1 &  2 & x-y \\
+                          1 &  0 &  1 & y \\
+                          0 & -1 & -1 & z \end{Amat}
+        \to
+          \begin{Amat}{3} 1 &  1 &  2 & x-y \\
+                          0 & -1 & -1 & y-(x-y) \\
+                          0 & -1 & -1 & z \end{Amat}
+        \\&\to
+          \begin{Amat}{3} 1 &  1 &  2 & x-y \\
+                          0 & -1 & -1 & 2y-x \\
+                          0 &  0 &  0 & z-2y+x \end{Amat}   
+        \intertext{Which leaves us with a solution set}
+        x-2y+z &= 0
+        \intertext{which is a plane in $\mathbb{R}^3$\ which contains the vectors $\Ve{x,y,z}$\ that are linear combinations of $\Vn{v}_1,\Vn{v}_2,\Vn{v}_3$.}                                                  
+      \end{align*}
+    }
+    
+    \end{enumerate}
+\end{enumerate} 
+\end{document}  
